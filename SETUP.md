@@ -36,10 +36,16 @@ Keep the Google email records (MX `smtp.google.com`, TXT `google-site-verificati
 
 1. Create an account at <https://resend.com>.
 2. **Domains → Add domain** → `cyclebuddyapp.com`. When asked for a region, pick **North America (us-east-1)**.
-3. Resend shows a few DNS records (DKIM, SPF and an MX record on a `send` subdomain). Add **exactly** those in Namecheap → Advanced DNS:
-   - TXT/CNAME records go under **Host Records** → *Add new record*. Copy the host and value exactly as Resend shows them. Namecheap adds `.cyclebuddyapp.com` by itself, so for a host like `resend._domainkey.cyclebuddyapp.com` type only `resend._domainkey`.
-   - The MX record for host `send` goes under **Mail Settings → Custom MX** → *Add new record*, next to the existing Google MX. Don't remove the Google one.
-   - These records live on sub-names (`send`, `resend._domainkey`), so they don't affect your Google email.
+   Under *Advanced options*: Custom Return-Path `send`. Leave click/open **tracking off** and **receiving off** (Google handles incoming email).
+3. Resend shows three DNS records. Add them in Namecheap → Advanced DNS → **Host Records** → *Add new record* (one at a time, ✓ after each). Use Resend's copy button, because the values are shown shortened:
+
+   | Type | Host | Value |
+   |---|---|---|
+   | TXT | `resend._domainkey` | `p=MIGfMA…` (DKIM key, from Resend) |
+   | CNAME | `rsend` | `rsend.…mta.net` (from Resend) |
+   | CNAME | `send` | `send.…mta.net` (from Resend) |
+
+   Namecheap adds `.cyclebuddyapp.com` by itself. These records live on sub-names, so they don't affect your Google email (MX stays as it is).
 4. Back in Resend, click **Verify**. It's usually done within 15 minutes, though it can take longer.
 5. **Audience / Segments**: create a segment named `Waitlist` and copy its **ID**.
 6. **API Keys → Create API key** with **Full access** (sending emails *and* saving contacts). Copy it now (it's shown once). **Never paste it into the repo.**

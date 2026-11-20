@@ -12,7 +12,7 @@ TO_EMAIL = "hello@cyclebuddy.ca"
 FROM_EMAIL = "CycleBuddy <noreply@cyclebuddyapp.com>"
 SITE_URL = "https://cyclebuddyapp.com"
 # Paste the ID of your Resend segment ("Waitlist") here, or leave empty.
-RESEND_SEGMENT_ID = ""
+RESEND_SEGMENT_ID = "c5625e9f-c142-4e66-b6e1-a57fd43bea1d"
 
 # 5 form submissions per minute per visitor. Cloudflare keeps the counter briefly; nothing is stored by us.
 [[ratelimits]]

@@ -11,8 +11,7 @@ info:
   contact:
     email: hello@cyclebuddy.ca
 servers:
-  # Replaced with the deployed Worker URL (see SETUP.md)
-  - url: https://cyclebuddy-forms.YOUR-SUBDOMAIN.workers.dev
+  - url: https://cyclebuddy-forms.toolsmb-lab.workers.dev
 paths:
   /waitlist:
     post:

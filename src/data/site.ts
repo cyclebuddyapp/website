@@ -7,6 +7,5 @@ export const SITE = {
 };
 
 // Cloudflare Worker that receives the forms (see /worker and SETUP.md).
-// Set PUBLIC_FORMS_ENDPOINT in the GitHub Actions workflow (or a local .env) once the Worker is deployed,
-// e.g. https://cyclebuddy-forms.<your-subdomain>.workers.dev
-export const FORMS_ENDPOINT: string = import.meta.env.PUBLIC_FORMS_ENDPOINT ?? '';
+// The deployed Worker address. PUBLIC_FORMS_ENDPOINT (GitHub Actions variable or local .env) overrides it.
+export const FORMS_ENDPOINT: string = import.meta.env.PUBLIC_FORMS_ENDPOINT || 'https://cyclebuddy-forms.toolsmb-lab.workers.dev';
