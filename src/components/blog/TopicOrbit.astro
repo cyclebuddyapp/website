@@ -1,0 +1,56 @@
+---
+// Generalist vs specialist: scattered topics on one side, topics orbiting "your cycle" on the other.
+interface Props {
+  generalTitle: string; generalText: string; generalTopics: string[];
+  specialTitle: string; specialText: string; center: string; topics: string[];
+}
+const { generalTitle, generalText, generalTopics, specialTitle, specialText, center, topics } = Astro.props;
+const n = topics.length;
+---
+<figure class="orb">
+  <div class="panel gen">
+    <div class="stage scatter" aria-hidden="true">
+      {generalTopics.map((t, i) => <span class="chip" style={`--i:${i}`}>{t}</span>)}
+    </div>
+    <h3>{generalTitle}</h3>
+    <p>{generalText}</p>
+  </div>
+  <div class="panel spec">
+    <div class="stage" aria-hidden="true">
+      <div class="ring">
+        {topics.map((t, i) => (
+          <span class="slot" style={`--a:${(360 / n) * i}deg`}><span class="chip c">{t}</span></span>
+        ))}
+      </div>
+      <span class="center">{center}</span>
+    </div>
+    <h3>{specialTitle}</h3>
+    <p>{specialText}</p>
+  </div>
+</figure>
+
+<style>
+  .orb { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin: 2em 0; }
+  .panel { border-radius: 22px; padding: 18px 22px 24px; border: 1px solid var(--line); background: #fff; }
+  .spec { background: linear-gradient(180deg, #FFF3F6, #fff); border-color: #EFC9D5; }
+  .panel h3 { font-size: 24px; margin: 4px 0 0; }
+  .panel p { margin-top: 6px; font-size: 15.5px; color: var(--muted); }
+  .stage { position: relative; height: 230px; }
+  .chip { font-family: var(--sans); font-size: 12.5px; font-weight: 600; white-space: nowrap; border-radius: 999px; padding: 5px 11px; background: #F4EEEA; color: #7C6F6A; border: 1px solid #E6DCD5; }
+
+  /* generalist: topics everywhere, drifting a little */
+  .scatter { display: flex; flex-wrap: wrap; align-content: center; justify-content: center; gap: 8px; padding: 10px 4px; }
+  .scatter .chip { animation: drift 5s ease-in-out infinite; animation-delay: calc(var(--i) * -.7s); opacity: calc(1 - var(--i) * .035); }
+  @keyframes drift { 50% { transform: translate(3px, -5px) rotate(-2deg); } }
+
+  /* specialist: everything orbits one thing */
+  .center { position: absolute; left: 50%; top: 50%; translate: -50% -50%; z-index: 2; font-family: var(--serif); font-style: italic; font-weight: 700; font-size: 20px; color: #fff; background: var(--grad); border-radius: 999px; padding: 10px 18px; box-shadow: 0 14px 28px -14px rgba(128,0,32,.8); white-space: nowrap; }
+  .ring { position: absolute; left: 50%; top: 50%; width: 0; height: 0; animation: spin 36s linear infinite; }
+  .slot { position: absolute; left: 0; top: 0; transform: rotate(var(--a)) translateY(-100px) rotate(calc(-1 * var(--a))); }
+  .slot .c { display: inline-block; translate: -50% -50%; background: #fff; color: var(--burgundy); border-color: #EFC9D5; animation: spin 36s linear infinite reverse; }
+  @keyframes spin { to { transform: rotate(360deg); } }
+
+  @media (max-width: 640px) { .orb { grid-template-columns: 1fr; } }
+  .stage:has(.ring) { height: 250px; }
+  @media (max-width: 640px) { .center { font-size: 17px; padding: 8px 14px; } }
+</style>

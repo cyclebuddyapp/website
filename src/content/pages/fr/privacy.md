@@ -10,7 +10,7 @@ updated: 2026-11-20
 - Ce site n’utilise **ni témoins (cookies), ni outils d’analyse, ni traceurs**.
 - Nous recevons uniquement les renseignements que **tu choisis de nous envoyer** au moyen d’un formulaire.
 - Nous les utilisons seulement pour la raison pour laquelle tu nous les as envoyés, et nous ne les vendons jamais.
-- Tu peux nous demander de les supprimer en tout temps : écris-nous à [hello@cyclebuddy.ca](mailto:hello@cyclebuddy.ca).
+- Tu peux nous demander de les supprimer en tout temps : écris-nous à [hello@cyclebuddy.ca](mailto:hello@cyclebuddy.ca).
 
 ## Ce que recueillent les formulaires, et pourquoi
 
@@ -20,23 +20,23 @@ updated: 2026-11-20
 | Contact | Ton nom, ton courriel et ton message | Pour lire ton message et te répondre |
 | Partenariats de recherche | Nom, établissement, courriel et message | Pour discuter d’un éventuel partenariat de recherche |
 
-Chaque formulaire comporte aussi un champ caché que les personnes ne voient jamais. Il nous aide à bloquer les pourriels automatiques : s’il est rempli, le message est rejeté.
+Chaque formulaire comporte aussi un champ caché que les personnes ne voient jamais. Il nous aide à bloquer les pourriels automatiques : s’il est rempli, le message est rejeté.
 
 ## Qui traite tes renseignements
 
-Pour envoyer et conserver les messages des formulaires, nous faisons appel à deux fournisseurs :
+Pour envoyer et conserver les messages des formulaires, nous faisons appel à deux fournisseurs :
 
 - **Cloudflare** exécute la petite fonction serveur qui reçoit les formulaires. Elle utilise brièvement ton adresse IP pour limiter les abus (par exemple, trop d’envois en peu de temps). Nous ne la conservons pas.
 - **Resend**, un service de courriel établi aux États-Unis, achemine les messages des formulaires vers notre boîte de réception et conserve la liste d’attente pour que nous puissions t’écrire.
 
 Ce site est hébergé sur **GitHub Pages**. Comme la plupart des hébergeurs Web, GitHub peut consigner les adresses IP des visiteurs à des fins de sécurité, comme l’explique sa déclaration de confidentialité. Nous n’avons pas accès à ces journaux et nous ne les utilisons pas.
 
-Les polices de caractères sont servies depuis notre propre domaine : charger une page ne contacte donc aucun tiers.
+Les polices de caractères sont servies depuis notre propre domaine : charger une page ne contacte donc aucun tiers.
 
 ## Combien de temps nous les conservons
 
-- **Liste d’attente :** jusqu’à ce que tu te désabonnes ou que tu nous demandes de la supprimer. Chaque courriel que nous envoyons contient un lien de désabonnement.
-- **Messages de contact et de recherche :** le temps nécessaire pour te répondre et assurer le suivi, puis nous les supprimons.
+- **Liste d’attente :** jusqu’à ce que tu te désabonnes ou que tu nous demandes de la supprimer. Chaque courriel que nous envoyons contient un lien de désabonnement.
+- **Messages de contact et de recherche :** le temps nécessaire pour te répondre et assurer le suivi, puis nous les supprimons.
 
 ## Tes choix
 

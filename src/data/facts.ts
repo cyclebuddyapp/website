@@ -68,7 +68,7 @@ export const FACTS: Record<Lang, Fact[]> = {
     { id: 'research', topic: 'Recherche', answer: 'Uniquement si tu le choisis, une étude à la fois. Les données sont anonymisées avant de quitter ton téléphone, et tu peux arrêter quand tu veux.' },
     { id: 'open', topic: 'Code source ouvert', answer: 'Oui. Tout le monde peut examiner le code.' },
     { id: 'launch', topic: 'Lancement', answer: 'Pas encore offerte dans les magasins d’applis. CycleBuddy arrive cet hiver (décembre 2026 ou janvier 2027). La liste d’attente est ouverte.' },
-    { id: 'company', topic: 'Entreprise', answer: 'CycleBuddy, établie en Ontario, au Canada. Founder & CEO : Brady.' },
+    { id: 'company', topic: 'Entreprise', answer: 'CycleBuddy, établie en Ontario, au Canada. Founder & CEO : Brady.' },
     { id: 'award', topic: 'Distinctions', answer: '1re place, volet Stellar, Hackathon EasyA × Consensus, Toronto, 2025.' },
     { id: 'contact', topic: 'Contact', answer: 'hello@cyclebuddy.ca' },
     { id: 'site', topic: 'Ce site Web', answer: 'Ni témoins (cookies), ni outils d’analyse, ni traceurs.' },

@@ -13,8 +13,8 @@ const posts = await postsFor(lang);
   <PageHeader eyebrow={s.eyebrow} h1={s.listH} lead={s.listLead} />
   <section class="body">
     <div class="wrap">
-      <ul class="grid" role="list">
-        {posts.map((p, i) => <PostCard post={p} lang={lang} i={i} headingLevel="h2" />)}
+      <ul class:list={['grid', { one: posts.length === 1 }]} role="list">
+        {posts.map((p, i) => <PostCard post={p} lang={lang} i={i} headingLevel="h2" featured={posts.length === 1} />)}
       </ul>
     </div>
   </section>
@@ -23,5 +23,6 @@ const posts = await postsFor(lang);
 <style>
   .body { padding: clamp(40px, 6vw, 80px) 0 clamp(70px, 9vw, 110px); }
   .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; list-style: none; }
+  .one { grid-template-columns: 1fr !important; max-width: none !important; }
   @media (max-width: 900px) { .grid { grid-template-columns: 1fr; max-width: 560px; } }
 </style>

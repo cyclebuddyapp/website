@@ -4,7 +4,7 @@ import { glob } from 'astro/loaders';
 // Blog posts live in src/content/blog/<lang>/<slug>.md.
 // Use the same <slug> in every language so the language switcher can link between them.
 const blog = defineCollection({
-  loader: glob({ pattern: '**/*.md', base: './src/content/blog' }),
+  loader: glob({ pattern: '**/*.{md,mdx}', base: './src/content/blog' }),
   schema: z.object({
     title: z.string(),
     description: z.string(),

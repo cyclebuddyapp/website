@@ -1,0 +1,23 @@
+---
+// Highlighted aside inside a post (e.g. "The honest trade-off").
+import Icon from '../Icon.astro';
+interface Props { title: string; tone?: 'gold' | 'teal' }
+const { title, tone = 'gold' } = Astro.props;
+---
+<aside class:list={['callout', tone]}>
+  <span class="ci" aria-hidden="true"><Icon name={tone === 'teal' ? 'shield' : 'flag'} size={20} /></span>
+  <div>
+    <p class="ct">{title}</p>
+    <slot />
+  </div>
+</aside>
+
+<style>
+  .callout { display: flex; gap: 14px; align-items: flex-start; border-radius: 18px; padding: 18px 20px; margin: 1.8em 0; }
+  .gold { background: #FFF6E2; border: 1px solid #F0DDA8; color: #5E470C; }
+  .teal { background: var(--teal-soft); border: 1px solid #C9E7E2; color: #11504B; }
+  .ci { flex: none; width: 36px; height: 36px; border-radius: 11px; display: grid; place-items: center; background: rgba(255,255,255,.75); }
+  .ct { font-weight: 700; margin: 0 0 4px !important; }
+  .callout :global(p) { margin: 0; font-size: 16.5px; }
+  .callout :global(p + p) { margin-top: .6em; }
+</style>

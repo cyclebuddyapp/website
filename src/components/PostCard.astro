@@ -1,13 +1,13 @@
 ---
 import { slugOf, type Post } from '../data/blog';
 import { localize, t, type Lang } from '../i18n/utils';
-interface Props { post: Post; lang: Lang; i?: number; headingLevel?: 'h2' | 'h3' }
-const { post, lang, i = 0, headingLevel = 'h3' } = Astro.props;
+interface Props { post: Post; lang: Lang; i?: number; headingLevel?: 'h2' | 'h3'; featured?: boolean }
+const { post, lang, i = 0, headingLevel = 'h3', featured = false } = Astro.props;
 const s = t(lang).blog;
 const H = headingLevel;
 const d = post.data;
 ---
-<li class="post reveal" style={`--i:${i}`}>
+<li class:list={['post reveal', { featured }]} style={`--i:${i}`}>
   <div class:list={['cover', d.cover]} aria-hidden="true"><span>{d.coverText}</span></div>
   <div class="body">
     <p class="meta">
@@ -40,4 +40,11 @@ const d = post.data;
   .title a::after { content: ''; position: absolute; inset: 0; }
   .title a:focus-visible { outline: none; }
   .desc { color: var(--muted); font-size: 15px; }
+  /* featured: one wide card, cover on the left */
+  .featured { display: grid; grid-template-columns: .9fr 1.1fr; }
+  .featured .cover { height: 100%; min-height: 260px; font-size: 120px; }
+  .featured .body { padding: clamp(26px, 4vw, 44px); align-self: center; }
+  .featured .title { font-size: clamp(30px, 3.4vw, 40px); }
+  .featured .desc { font-size: 17px; }
+  @media (max-width: 760px) { .featured { grid-template-columns: 1fr; } .featured .cover { min-height: 180px; font-size: 80px; } }
 </style>

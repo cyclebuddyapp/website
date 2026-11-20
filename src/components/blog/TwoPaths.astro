@@ -1,0 +1,97 @@
+---
+// Animated comparison: big AI (data travels to far-away servers) vs small AI (data stays on the phone).
+// Decorative SVGs; the meaning is carried by the visible titles and captions.
+interface Side { title: string; caption: string; label: string }
+interface Props { big: Side; small: Side }
+const { big, small } = Astro.props;
+const out = 'M64 92 C 120 22, 190 22, 238 70';
+const back = 'M238 92 C 190 140, 120 140, 64 104';
+---
+<figure class="two">
+  <div class="side big">
+    <svg viewBox="0 0 320 170" aria-hidden="true">
+      <path d={out} class="route" />
+      <path d={back} class="route" />
+      <!-- phone -->
+      <rect x="22" y="44" width="44" height="80" rx="10" class="phone" />
+      <circle cx="44" cy="84" r="7" class="heart" />
+      <!-- data center -->
+      <g class="dc">
+        <path d="M232 76a22 22 0 0 1 40-14 18 18 0 0 1 30 14 14 14 0 0 1-2 28h-62a16 16 0 0 1-6-28z" class="cloud" />
+        <rect x="246" y="108" width="40" height="10" rx="3" class="srv" />
+        <rect x="246" y="121" width="40" height="10" rx="3" class="srv" />
+        <rect x="246" y="134" width="40" height="10" rx="3" class="srv" />
+        <circle cx="252" cy="113" r="1.8" class="led" /><circle cx="252" cy="126" r="1.8" class="led l2" /><circle cx="252" cy="139" r="1.8" class="led l3" />
+      </g>
+      <!-- data packets travelling out and back -->
+      <circle r="5" class="pkt out p1" style={`offset-path: path('${out}')`} />
+      <circle r="5" class="pkt out p2" style={`offset-path: path('${out}')`} />
+      <circle r="5" class="pkt out p3" style={`offset-path: path('${out}')`} />
+      <circle r="4" class="pkt back p1" style={`offset-path: path('${back}')`} />
+      <circle r="4" class="pkt back p2" style={`offset-path: path('${back}')`} />
+    </svg>
+    <p class="tag">{big.label}</p>
+    <h3>{big.title}</h3>
+    <p>{big.caption}</p>
+  </div>
+
+  <div class="side small">
+    <svg viewBox="0 0 320 170" aria-hidden="true">
+      <circle cx="160" cy="85" r="74" class="fence" />
+      <rect x="122" y="18" width="76" height="134" rx="16" class="phone" />
+      <rect x="148" y="26" width="24" height="5" rx="2.5" class="notch" />
+      <g class="chip">
+        <rect x="142" y="67" width="36" height="36" rx="9" />
+        <text x="160" y="90" text-anchor="middle">AI</text>
+      </g>
+      <g class="orbit">
+        <circle cx="160" cy="52" r="5" class="dot d1" />
+        <circle cx="189" cy="98" r="4.5" class="dot d2" />
+        <circle cx="131" cy="98" r="4.5" class="dot d3" />
+      </g>
+    </svg>
+    <p class="tag">{small.label}</p>
+    <h3>{small.title}</h3>
+    <p>{small.caption}</p>
+  </div>
+</figure>
+
+<style>
+  .two { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin: 2em 0; }
+  .side { border-radius: 22px; padding: 20px 22px 24px; border: 1px solid var(--line); }
+  .big { background: linear-gradient(180deg, #F7F3F1, #FFFFFF); }
+  .small { background: linear-gradient(180deg, var(--teal-soft), #FFFFFF); border-color: #C9E7E2; }
+  svg { width: 100%; height: auto; display: block; overflow: visible; }
+  .tag { margin: 6px 0 4px; font-size: 12px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; }
+  .big .tag { color: #8A6410; }
+  .small .tag { color: var(--teal-ink); }
+  .side h3 { font-size: 24px; margin: 0; }
+  .side p:last-child { margin-top: 6px; font-size: 15.5px; color: var(--muted); }
+
+  .route { fill: none; stroke: #D9CBC0; stroke-width: 2; stroke-dasharray: 4 6; }
+  .phone { fill: #fff; stroke: #3B2A2E; stroke-width: 4; }
+  .heart { fill: var(--pink); }
+  .cloud { fill: #EEE6E1; stroke: #B9AAA2; stroke-width: 2; }
+  .srv { fill: #E2D7D0; stroke: #B9AAA2; stroke-width: 1.5; }
+  .led { fill: #C9962B; animation: blink 1.4s steps(2) infinite; }
+  .l2 { animation-delay: .45s; } .l3 { animation-delay: .9s; }
+  @keyframes blink { 50% { opacity: .2; } }
+  .pkt { offset-rotate: 0deg; offset-distance: 0%; }
+  .pkt.out { fill: var(--pink); animation: travel 3.6s cubic-bezier(.45,0,.55,1) infinite; }
+  .pkt.back { fill: #B9AAA2; animation: travel 3.6s cubic-bezier(.45,0,.55,1) infinite; animation-delay: 1.8s; }
+  .p2 { animation-delay: 1.2s !important; } .p3 { animation-delay: 2.4s !important; }
+  .pkt.back.p2 { animation-delay: 3s !important; }
+  @keyframes travel { 0% { offset-distance: 0%; opacity: 0; } 10%, 85% { opacity: 1; } 100% { offset-distance: 100%; opacity: 0; } }
+
+  .fence { fill: none; stroke: var(--teal); stroke-width: 2; stroke-dasharray: 5 7; transform-origin: 160px 85px; animation: spin 30s linear infinite; }
+  .notch { fill: #3B2A2E; }
+  .chip rect { fill: var(--teal-ink); }
+  .chip text { fill: #fff; font: 700 13px var(--sans); }
+  .chip { transform-origin: 160px 85px; animation: pulse 2.8s ease-in-out infinite; }
+  .orbit { transform-origin: 160px 85px; animation: spin 6s linear infinite; }
+  .dot { fill: var(--pink); } .d2 { fill: var(--teal); } .d3 { fill: var(--burgundy); }
+  @keyframes spin { to { transform: rotate(360deg); } }
+  @keyframes pulse { 50% { transform: scale(1.08); } }
+
+  @media (max-width: 640px) { .two { grid-template-columns: 1fr; } }
+</style>

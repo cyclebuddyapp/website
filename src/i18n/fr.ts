@@ -1,7 +1,7 @@
 // Français (neutre, naturel au Canada comme en France). Même forme que en.ts.
 // Tutoiement pour le grand public, vouvoiement pour les partenaires de recherche.
-// Ponctuation : pas d'espace avant ? et ! (usage canadien), espace avant les deux-points.
-// Tout est à relire ; « À REVOIR » = formulations sur la vie privée, l'IA ou les données.
+// Ponctuation : pas d'espace avant ? et ! (usage canadien), espace avant les deux-points.
+// Tout est à relire ; « À REVOIR » = formulations sur la vie privée, l'IA ou les données.
 import type { Dict } from './en';
 
 const fr: Dict = {
@@ -75,7 +75,7 @@ const fr: Dict = {
     items: [
       { h: 'Suivre', p: 'Note tes règles, tes douleurs, ton énergie, ton humeur et tes notes en quelques secondes. Un calendrier simple et élégant.' },
       { h: 'Apprendre', p: 'Une éducation gratuite sur la santé menstruelle, racontée dans une courte série humoristique plutôt que dans de longs articles.' },
-      { h: 'S’aligner', p: 'Organise tes journées au rythme de tes hormones : quoi manger, comment bouger et quand te reposer, selon ton corps.' },
+      { h: 'S’aligner', p: 'Organise tes journées au rythme de tes hormones : quoi manger, comment bouger et quand te reposer, selon ton corps.' },
     ],
   },
   learn: {
@@ -92,7 +92,7 @@ const fr: Dict = {
   ai: {
     eyebrow: 'Une IA, une seule mission',
     h: 'Une IA conçue uniquement pour la santé menstruelle.',
-    p: 'Nous n’ajoutons pas un robot conversationnel générique à une appli de règles. Nous créons un modèle dédié qui fait une seule chose, et la fait bien : comprendre ton cycle et t’aider à en prendre soin. Comme il n’a qu’une mission, il peut être assez petit pour tenir dans ton téléphone et n’apprendre que de ce que tu y notes.',
+    p: 'Nous n’ajoutons pas un robot conversationnel générique à une appli de règles. Nous créons un modèle dédié qui fait une seule chose, et la fait bien : comprendre ton cycle et t’aider à en prendre soin. Comme il n’a qu’une mission, il peut être assez petit pour tenir dans ton téléphone et n’apprendre que de ce que tu y notes.',
     checks: [
       'Fonctionne sur ton téléphone, même sans connexion',
       'Adapte l’alimentation, l’activité physique et le soulagement de la douleur à tes propres symptômes, pas seulement à la phase de ton cycle',
@@ -112,20 +112,20 @@ const fr: Dict = {
       { h: 'Alignée', p: 'Pensée d’abord pour ton bien-être. Elle choisit parmi des conseils révisés, te dit quand elle n’est pas sûre et t’invite à consulter un médecin quand c’est nécessaire.' },
     ],
     // À REVOIR (IA)
-    localH: 'Que veut dire « IA locale »?',
+    localH: 'Que veut dire « IA locale »?',
     localP:
-      '« Locale » veut simplement dire que l’IA travaille à l’intérieur de l’appli CycleBuddy, sur ton téléphone, au lieu d’envoyer tes informations aux serveurs d’une entreprise. Pense à la calculatrice de ton téléphone : elle fonctionne toute seule, même sans connexion.',
+      '« Locale » veut simplement dire que l’IA travaille à l’intérieur de l’appli CycleBuddy, sur ton téléphone, au lieu d’envoyer tes informations aux serveurs d’une entreprise. Pense à la calculatrice de ton téléphone : elle fonctionne toute seule, même sans connexion.',
     localItems: [
       'Elle ne voit que ce que tu notes dans CycleBuddy. Elle ne peut pas ouvrir tes messages, tes photos, tes contacts ni tes autres applis.',
       'Elle ne peut pas passer d’appels, envoyer de messages ni modifier quoi que ce soit sur ton téléphone. Elle suggère; c’est toi qui décides.',
-      'Son code est ouvert : tout le monde peut vérifier exactement ce qu’elle fait.',
+      'Son code est ouvert : tout le monde peut vérifier exactement ce qu’elle fait.',
     ],
     localMore: 'D’autres questions sur l’IA',
   },
   data: {
     eyebrow: 'Tes données',
     h: 'Tes données. Ta décision.',
-    p: 'Nous ne nous contentons pas de promettre de ne pas vendre tes données : c’est toi qui décides de ce qu’elles deviennent, et l’option la plus confidentielle est toujours celle par défaut.',
+    p: 'Nous ne nous contentons pas de promettre de ne pas vendre tes données : c’est toi qui décides de ce qu’elles deviennent, et l’option la plus confidentielle est toujours celle par défaut.',
     cards: [
       { k: 'Par défaut', h: 'Elles restent sur ton téléphone', p: 'Tes notes sont chiffrées et stockées sur ton appareil. Pas besoin de compte pour suivre ton cycle.' },
       { k: 'À toi de choisir', h: 'Sauvegarde chiffrée', p: 'Active une sauvegarde dans le nuage que toi seule peux déverrouiller. Nous ne pouvons pas la lire.' },
@@ -159,7 +159,7 @@ const fr: Dict = {
     back: 'Tous les articles',
     listTitle: 'Blogue',
     listH: 'Le carnet de bord de CycleBuddy',
-    listLead: 'Notes, recherche et journaux vidéo : la construction de CycleBuddy, au grand jour.',
+    listLead: 'Notes, recherche et journaux vidéo : la construction de CycleBuddy, au grand jour.',
     published: 'Publié',
   },
   mission: {
@@ -168,7 +168,7 @@ const fr: Dict = {
     items: [
       { h: 'Pour toutes les femmes', p: 'L’éducation reste gratuite, pour que connaître ton corps ne dépende jamais de tes moyens.' },
       { h: 'Où que tu sois', p: 'Elle fonctionne sans connexion, même sur des téléphones abordables, et l’IA privée n’a besoin d’aucun forfait de données. En anglais et en espagnol, et bientôt en français.' },
-      { h: 'Ados et écoles, la suite', p: 'Une version gratuite pour les ados et du matériel pédagogique sont prévus : sur l’appareil, chiffrés et à code source ouvert, sans aucun partage de données, jamais.' },
+      { h: 'Ados et écoles, la suite', p: 'Une version gratuite pour les ados et du matériel pédagogique sont prévus : sur l’appareil, chiffrés et à code source ouvert, sans aucun partage de données, jamais.' },
     ],
     teachers: 'Personnel enseignant, écrivez-nous',
   },
@@ -214,9 +214,9 @@ const fr: Dict = {
   pages: {
     research: {
       title: 'Recherche · CycleBuddy',
-      description: 'Comment fonctionne la recherche chez CycleBuddy : un consentement pour chaque étude, ce que les femmes nous ont dit, et comment les universités et les entreprises peuvent devenir partenaires.',
+      description: 'Comment fonctionne la recherche chez CycleBuddy : un consentement pour chaque étude, ce que les femmes nous ont dit, et comment les universités et les entreprises peuvent devenir partenaires.',
       partnerH: 'Devenir partenaire',
-      partnerP: 'Universités, laboratoires et entreprises qui travaillent en santé des femmes : parlez-nous de votre question de recherche, et nous vous répondrons.',
+      partnerP: 'Universités, laboratoires et entreprises qui travaillent en santé des femmes : parlez-nous de votre question de recherche, et nous vous répondrons.',
     },
     privacy: {
       title: 'Politique de confidentialité · CycleBuddy',
@@ -224,7 +224,7 @@ const fr: Dict = {
     },
     facts: {
       title: 'CycleBuddy en bref',
-      description: 'Des faits vérifiés sur CycleBuddy : ce que c’est, plateformes, langues, prix, où sont stockées tes données, lancement et contact.',
+      description: 'Des faits vérifiés sur CycleBuddy : ce que c’est, plateformes, langues, prix, où sont stockées tes données, lancement et contact.',
       eyebrow: 'Faits',
       h: 'CycleBuddy en un coup d’œil',
       lead: 'Des faits clairs et vérifiés sur CycleBuddy. Quand quelque chose change, cette page change en premier.',
@@ -234,7 +234,7 @@ const fr: Dict = {
     },
     faq: {
       title: 'FAQ · CycleBuddy',
-      description: 'Réponses aux questions fréquentes sur CycleBuddy : prix, confidentialité, stockage de tes données, IA sur ton téléphone, langues et lancement.',
+      description: 'Réponses aux questions fréquentes sur CycleBuddy : prix, confidentialité, stockage de tes données, IA sur ton téléphone, langues et lancement.',
       eyebrow: 'FAQ',
       h: 'Questions fréquentes',
       lead: 'Des réponses courtes et honnêtes. Tu ne trouves pas la tienne? Écris-nous à hello@cyclebuddy.ca.',

@@ -17,8 +17,8 @@ const posts = (await postsFor(lang)).slice(0, 3);
       </div>
       <a class="btn btn-ghost reveal" style="--i:2" href={localize(lang, '/blog/')}>{s.all}<Icon name="arrow" size={18} class="arrow" /></a>
     </div>
-    <ul class="bgrid" role="list">
-      {posts.map((p, i) => <PostCard post={p} lang={lang} i={i} />)}
+    <ul class:list={['bgrid', { one: posts.length === 1 }]} role="list">
+      {posts.map((p, i) => <PostCard post={p} lang={lang} i={i} featured={posts.length === 1} />)}
     </ul>
   </div>
 </section>
@@ -26,5 +26,6 @@ const posts = (await postsFor(lang)).slice(0, 3);
 <style>
   .bhead { display: flex; justify-content: space-between; align-items: end; gap: 20px; flex-wrap: wrap; }
   .bgrid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; margin-top: 46px; list-style: none; }
+  .one { grid-template-columns: 1fr !important; max-width: none !important; }
   @media (max-width: 900px) { .bgrid { grid-template-columns: 1fr; max-width: 520px; } }
 </style>

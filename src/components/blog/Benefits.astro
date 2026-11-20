@@ -1,0 +1,27 @@
+---
+// Grid of benefit tiles with duotone icons. Real list markup, so it reads well without styles.
+import Icon from '../Icon.astro';
+type IconName = 'lock' | 'phone' | 'leaf' | 'shield' | 'globe' | 'heart' | 'sparkle' | 'eye' | 'book';
+interface Props { items: { icon: IconName; h: string; p: string }[] }
+const { items } = Astro.props;
+---
+<ul class="ben" role="list">
+  {items.map((it, i) => (
+    <li class="reveal" style={`--i:${i}`}>
+      <span class="bi gloss" aria-hidden="true"><Icon name={it.icon} size={22} /></span>
+      <strong>{it.h}</strong>
+      <span class="bp">{it.p}</span>
+    </li>
+  ))}
+</ul>
+
+<style>
+  .ben { list-style: none; padding: 0 !important; display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin: 1.6em 0 2em; }
+  .ben li { margin: 0 !important; display: grid; grid-template-columns: auto 1fr; grid-template-rows: auto auto; column-gap: 14px; row-gap: 2px; align-items: start; background: #fff; border: 1px solid #F1E4DA; border-radius: 18px; padding: 18px; box-shadow: 0 14px 30px -24px rgba(128,0,32,.5); transition: transform .35s var(--ease), box-shadow .35s var(--ease); }
+  .ben li:hover { transform: translateY(-4px); box-shadow: var(--shadow); }
+  .bi { grid-row: span 2; width: 46px; height: 46px; border-radius: 14px; display: grid; place-items: center; color: #fff; background: var(--grad); }
+  .ben li:nth-child(even) .bi { background: linear-gradient(135deg, var(--teal), var(--teal-ink)); }
+  strong { font-size: 17px; color: var(--burgundy); line-height: 1.3; }
+  .bp { font-size: 15px; color: var(--muted); line-height: 1.5; }
+  @media (max-width: 640px) { .ben { grid-template-columns: 1fr; } }
+</style>

@@ -7,7 +7,7 @@ updated: 2026-11-20
 
 ## Comment fonctionne le consentement
 
-Partager des données avec la recherche est toujours ton choix, et ce n’est jamais activé par défaut. Voici comment ça se passe, étape par étape :
+Partager des données avec la recherche est toujours ton choix, et ce n’est jamais activé par défaut. Voici comment ça se passe, étape par étape :
 
 1. **Une étude te le demande.** Une équipe de recherche propose une question précise. Chaque étude te demande ton accord séparément. Il n’y a pas de consentement global.
 2. **Tu vois tout d’abord.** Avant de décider, tu vois qui fait la demande, la question de recherche et exactement ce qui serait partagé.
@@ -20,7 +20,7 @@ Partager des données avec la recherche est toujours ton choix, et ce n’est ja
 
 Nous avons commencé par écouter. Au moins 17 femmes de 18 à 40 ans ont répondu à notre questionnaire sur les règles, les applis de suivi et la vie privée. Leurs réponses ont façonné chaque fonctionnalité, du format éducatif aux réglages de confidentialité par défaut. D’autres voix du Pérou s’ajouteront bientôt.
 
-Quelques thèmes qui sont ressortis :
+Quelques thèmes qui sont ressortis :
 
 - Les longs articles sur la santé menstruelle sont difficiles à lire jusqu’au bout.
 - On sait rarement ce que les applis de règles font des données qu’on y note.
@@ -30,4 +30,4 @@ Quelques thèmes qui sont ressortis :
 
 ## Avec qui nous voulons travailler
 
-Nous cherchons des universités et des entreprises partenaires pour notre première étude avec consentement : universités, laboratoires et entreprises qui travaillent en santé des femmes. Chaque partenariat suit le modèle de consentement décrit plus haut, sans exception.
+Nous cherchons des universités et des entreprises partenaires pour notre première étude avec consentement : universités, laboratoires et entreprises qui travaillent en santé des femmes. Chaque partenariat suit le modèle de consentement décrit plus haut, sans exception.

@@ -79,7 +79,7 @@ export const FAQ: Record<Lang, FaqGroup[]> = {
     {
       id: 'basics', title: 'L’essentiel', items: [
         { id: 'free', q: 'L’éducation est-elle gratuite?', a: 'Oui. L’éducation sur la santé menstruelle de CycleBuddy est toujours gratuite, pour toutes, pour que connaître ton corps ne dépende jamais de tes moyens.' },
-        { id: 'launch', q: 'Quand CycleBuddy sera-t-elle lancée?', a: 'CycleBuddy arrive cet hiver, en décembre 2026 ou en janvier 2027. Elle n’est pas encore offerte dans les magasins d’applis. Inscris-toi à la liste d’attente sur notre page d’accueil : nous te préviendrons dès qu’elle sera prête.' },
+        { id: 'launch', q: 'Quand CycleBuddy sera-t-elle lancée?', a: 'CycleBuddy arrive cet hiver, en décembre 2026 ou en janvier 2027. Elle n’est pas encore offerte dans les magasins d’applis. Inscris-toi à la liste d’attente sur notre page d’accueil : nous te préviendrons dès qu’elle sera prête.' },
         { id: 'phones', q: 'Sur quels téléphones fonctionne-t-elle?', a: 'Sur iPhone (iOS) et Android, y compris les téléphones Android abordables.' },
         { id: 'spanish', q: 'CycleBuddy est-elle offerte en espagnol? Et en français?', a: 'CycleBuddy est offerte en anglais et en espagnol, et le français arrive bientôt. Ce site Web, lui, est déjà offert en français.' },
       ],
@@ -95,15 +95,15 @@ export const FAQ: Record<Lang, FaqGroup[]> = {
     },
     {
       id: 'ai', title: 'L’IA privée', items: [
-        { id: 'local', q: 'Que veut dire « IA locale » ou « IA sur l’appareil »?', a: '« Locale » veut simplement dire que l’IA travaille à l’intérieur de l’appli CycleBuddy, sur ton téléphone, au lieu d’envoyer tes informations aux serveurs d’une entreprise. Pense à la calculatrice de ton téléphone : elle fonctionne toute seule, même sans connexion. Rien de ce que tu notes n’a besoin de quitter ton téléphone pour que l’IA t’aide.' },
+        { id: 'local', q: 'Que veut dire « IA locale » ou « IA sur l’appareil »?', a: '« Locale » veut simplement dire que l’IA travaille à l’intérieur de l’appli CycleBuddy, sur ton téléphone, au lieu d’envoyer tes informations aux serveurs d’une entreprise. Pense à la calculatrice de ton téléphone : elle fonctionne toute seule, même sans connexion. Rien de ce que tu notes n’a besoin de quitter ton téléphone pour que l’IA t’aide.' },
         { id: 'access', q: 'L’IA peut-elle accéder au reste de mon téléphone?', a: 'Non. Elle ne voit que ce que tu notes dans CycleBuddy. Elle ne peut pas ouvrir tes messages, tes photos, tes contacts ni tes autres applis, et elle ne peut pas passer d’appels, envoyer de messages ni modifier quoi que ce soit sur ton téléphone. Elle suggère; c’est toi qui décides.' },
-        { id: 'internet', q: 'L’IA a-t-elle besoin d’Internet?', a: 'Non. Elle fonctionne sur ton téléphone, même sans connexion : pas besoin de forfait de données.' },
+        { id: 'internet', q: 'L’IA a-t-elle besoin d’Internet?', a: 'Non. Elle fonctionne sur ton téléphone, même sans connexion : pas besoin de forfait de données.' },
         { id: 'medical', q: 'CycleBuddy donne-t-elle des conseils médicaux?', a: 'CycleBuddy choisit parmi des conseils révisés par des personnes, jamais des conseils médicaux inventés. Elle te dit quand elle n’est pas sûre et t’invite à consulter un médecin quand c’est nécessaire. Elle ne remplace pas un ou une professionnelle de la santé.' },
       ],
     },
     {
       id: 'about', title: 'À propos', items: [
-        { id: 'who', q: 'Qui crée CycleBuddy?', a: 'CycleBuddy est établie en Ontario, au Canada. Elle a été fondée par Brady (Founder & CEO) : doctorat en mathématiques et recherche en apprentissage automatique axée sur la sûreté de l’IA. CycleBuddy a remporté la 1re place du volet Stellar au Hackathon EasyA × Consensus, à Toronto, en 2025.' },
+        { id: 'who', q: 'Qui crée CycleBuddy?', a: 'CycleBuddy est établie en Ontario, au Canada. Elle a été fondée par Brady (Founder & CEO) : doctorat en mathématiques et recherche en apprentissage automatique axée sur la sûreté de l’IA. CycleBuddy a remporté la 1re place du volet Stellar au Hackathon EasyA × Consensus, à Toronto, en 2025.' },
         { id: 'cookies', q: 'Ce site utilise-t-il des témoins (cookies)?', a: 'Non. Ce site n’utilise ni témoins, ni outils d’analyse, ni traceurs. Notre politique de confidentialité explique ce que recueillent les formulaires.' },
         { id: 'contact', q: 'Comment vous joindre?', a: 'Écris-nous à hello@cyclebuddy.ca, ou utilise le formulaire de contact sur notre page d’accueil.' },
       ],
