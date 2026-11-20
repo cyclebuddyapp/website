@@ -1,0 +1,104 @@
+openapi: 3.1.0
+info:
+  title: CycleBuddy website forms
+  version: 1.0.0
+  description: |
+    Public endpoints behind the forms on https://cyclebuddyapp.com: join the waitlist, contact the team,
+    or propose a research partnership. JSON in, JSON out. No authentication.
+    Privacy: data is used only for the stated purpose and never sold. See https://cyclebuddyapp.com/privacy/
+    Rate limit: 5 submissions per minute per client IP (HTTP 429 when exceeded).
+    Leave the `website` field empty: it is a spam trap.
+  contact:
+    email: hello@cyclebuddy.ca
+servers:
+  # Replaced with the deployed Worker URL (see SETUP.md)
+  - url: https://cyclebuddy-forms.YOUR-SUBDOMAIN.workers.dev
+paths:
+  /waitlist:
+    post:
+      summary: Join the CycleBuddy waitlist
+      description: Saves the email for launch news and sends a short confirmation email in the chosen language.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [email]
+              properties:
+                email: { type: string, format: email, maxLength: 254 }
+                language: { type: string, enum: [en, es, fr], default: en }
+                country: { type: string, maxLength: 80 }
+                website: { type: string, description: Spam trap. Must be empty. }
+            example: { email: ana@example.com, language: es, country: Peru }
+      responses:
+        '200': { $ref: '#/components/responses/Ok' }
+        '400': { $ref: '#/components/responses/Invalid' }
+        '429': { $ref: '#/components/responses/RateLimited' }
+        '502': { $ref: '#/components/responses/Failed' }
+  /contact:
+    post:
+      summary: Send a message to the CycleBuddy team
+      description: Emails hello@cyclebuddy.ca. Replies go to the email address provided.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [name, email, message]
+              properties:
+                name: { type: string, maxLength: 120 }
+                email: { type: string, format: email, maxLength: 254 }
+                message: { type: string, maxLength: 5000 }
+                language: { type: string, enum: [en, es, fr], default: en }
+                website: { type: string, description: Spam trap. Must be empty. }
+      responses:
+        '200': { $ref: '#/components/responses/Ok' }
+        '400': { $ref: '#/components/responses/Invalid' }
+        '429': { $ref: '#/components/responses/RateLimited' }
+        '502': { $ref: '#/components/responses/Failed' }
+  /partner:
+    post:
+      summary: Propose a research partnership
+      description: For universities, research labs and companies working on women's health. Emails the team with the subject "Research partnership".
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [name, institution, email, message]
+              properties:
+                name: { type: string, maxLength: 120 }
+                institution: { type: string, maxLength: 160 }
+                email: { type: string, format: email, maxLength: 254 }
+                message: { type: string, maxLength: 5000 }
+                language: { type: string, enum: [en, es, fr], default: en }
+                website: { type: string, description: Spam trap. Must be empty. }
+      responses:
+        '200': { $ref: '#/components/responses/Ok' }
+        '400': { $ref: '#/components/responses/Invalid' }
+        '429': { $ref: '#/components/responses/RateLimited' }
+        '502': { $ref: '#/components/responses/Failed' }
+components:
+  responses:
+    Ok:
+      description: Received.
+      content: { application/json: { schema: { type: object, properties: { ok: { const: true } } } } }
+    Invalid:
+      description: A required field is missing or the email is not valid.
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              ok: { const: false }
+              error: { const: invalid_fields }
+              fields: { type: array, items: { type: string } }
+    RateLimited:
+      description: Too many submissions. Wait a minute and try again.
+      content: { application/json: { schema: { type: object, properties: { ok: { const: false }, error: { const: rate_limited } } } } }
+    Failed:
+      description: The message could not be sent. Try again later or email hello@cyclebuddy.ca.
+      content: { application/json: { schema: { type: object, properties: { ok: { const: false }, error: { type: string } } } } }

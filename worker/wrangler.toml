@@ -1,0 +1,24 @@
+# Cloudflare Worker that receives the website's forms and sends them through Resend.
+# Deploy: npx wrangler deploy   (see ../SETUP.md)
+name = "cyclebuddy-forms"
+main = "src/index.ts"
+compatibility_date = "2025-09-01"
+workers_dev = true
+send_metrics = false
+
+[vars]
+ALLOWED_ORIGINS = "https://cyclebuddyapp.com,https://www.cyclebuddyapp.com,http://localhost:4321"
+TO_EMAIL = "hello@cyclebuddy.ca"
+FROM_EMAIL = "CycleBuddy <noreply@cyclebuddyapp.com>"
+SITE_URL = "https://cyclebuddyapp.com"
+# Paste the ID of your Resend segment ("Waitlist") here, or leave empty.
+RESEND_SEGMENT_ID = ""
+
+# 5 form submissions per minute per visitor. Cloudflare keeps the counter briefly; nothing is stored by us.
+[[ratelimits]]
+name = "LIMITER"
+namespace_id = "1001"
+simple = { limit = 5, period = 60 }
+
+# The Resend API key is a secret, never in this file:
+#   npx wrangler secret put RESEND_API_KEY
