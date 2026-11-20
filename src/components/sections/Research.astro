@@ -1,0 +1,68 @@
+---
+import Icon from '../Icon.astro';
+import { localize, t, type Lang } from '../../i18n/utils';
+interface Props { lang: Lang }
+const { lang } = Astro.props;
+const s = t(lang).research;
+---
+<section class="research" id="research">
+  <div class="wrap">
+    <div class="rhead">
+      <div>
+        <p class="eyebrow reveal">{s.eyebrow}</p>
+        <h2 class="reveal" style="--i:1">{s.h}</h2>
+      </div>
+      <p class="lead reveal" style="--i:2">{s.p}</p>
+    </div>
+    <ul class="rgrid" role="list">
+      {s.cards.map((c, i) => (
+        <li class="rcard reveal" style={`--i:${i}`}>
+          <span class="rnum" data-count={i === 0 ? '17' : undefined}>{c.n}</span>
+          <h3>{c.h}</h3>
+          <p>{c.p}</p>
+        </li>
+      ))}
+    </ul>
+    <div class="partner reveal">
+      <p><b>{s.partnerB}</b> <span>{s.partnerS}</span></p>
+      <a class="btn btn-primary" href={localize(lang, '/research/#partner')}>{s.partnerCta}<Icon name="arrow" size={18} class="arrow" /></a>
+    </div>
+  </div>
+</section>
+
+<style>
+  .research { background: var(--white); }
+  .rhead { display: grid; grid-template-columns: 1fr 1fr; gap: 50px; align-items: end; }
+  .rgrid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; margin-top: 50px; list-style: none; }
+  .rcard { border: 1px solid var(--line); border-radius: var(--r); padding: 32px 30px; background: var(--ivory-2); transition: transform .4s var(--ease), box-shadow .4s var(--ease); }
+  .rcard:hover { transform: translateY(-6px); box-shadow: var(--shadow); }
+  .rnum { display: block; font-family: var(--serif); font-size: 58px; font-weight: 700; line-height: 1; background: var(--grad); -webkit-background-clip: text; background-clip: text; color: transparent; font-variant-numeric: tabular-nums; }
+  .rcard h3 { margin: 14px 0 8px; }
+  .rcard p { color: var(--muted); font-size: 15px; }
+  .partner { margin-top: 26px; display: flex; justify-content: space-between; align-items: center; gap: 20px; flex-wrap: wrap; border-radius: 20px; padding: 24px 28px; font-size: 16px; background: linear-gradient(120deg, var(--pink-soft), #FBE9EE 50%, var(--teal-soft)); background-size: 200% 100%; animation: shimmer 12s ease-in-out infinite alternate; }
+  @keyframes shimmer { to { background-position: 100% 0; } }
+  .partner b { color: var(--burgundy); }
+  @media (max-width: 900px) { .rhead, .rgrid { grid-template-columns: 1fr; } .rhead { gap: 18px; } }
+</style>
+
+<script>
+  // Count the "17+" up from 0 when it scrolls into view. The real number is in the HTML already.
+  const el = document.querySelector<HTMLElement>('.rnum[data-count]');
+  if (el && 'IntersectionObserver' in window && !matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    const target = Number(el.dataset.count);
+    const final = el.textContent ?? '';
+    const io = new IntersectionObserver(([e]) => {
+      if (!e.isIntersecting) return;
+      io.disconnect();
+      const t0 = performance.now();
+      const tick = (now: number) => {
+        const k = Math.min(1, (now - t0) / 1400);
+        const eased = 1 - Math.pow(1 - k, 3);
+        el.textContent = k < 1 ? String(Math.round(target * eased)) : final;
+        if (k < 1) requestAnimationFrame(tick);
+      };
+      requestAnimationFrame(tick);
+    }, { threshold: 0.6 });
+    io.observe(el);
+  }
+</script>

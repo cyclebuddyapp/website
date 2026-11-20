@@ -1,0 +1,43 @@
+---
+import { slugOf, type Post } from '../data/blog';
+import { localize, t, type Lang } from '../i18n/utils';
+interface Props { post: Post; lang: Lang; i?: number; headingLevel?: 'h2' | 'h3' }
+const { post, lang, i = 0, headingLevel = 'h3' } = Astro.props;
+const s = t(lang).blog;
+const H = headingLevel;
+const d = post.data;
+---
+<li class="post reveal" style={`--i:${i}`}>
+  <div class:list={['cover', d.cover]} aria-hidden="true"><span>{d.coverText}</span></div>
+  <div class="body">
+    <p class="meta">
+      {d.category}{d.readMinutes && ` · ${d.readMinutes} ${s.min}`}
+      {d.draft && <span class="draft">{s.draft}</span>}
+    </p>
+    <H class="title"><a href={localize(lang, `/blog/${slugOf(post)}/`)}>{d.title}</a></H>
+    <p class="desc">{d.description}</p>
+  </div>
+</li>
+
+<style>
+  .post { position: relative; background: var(--white); border-radius: var(--r); overflow: hidden; box-shadow: var(--shadow); border: 1px solid #F1E4DA; transition: transform .4s var(--ease), box-shadow .4s var(--ease); }
+  .post:hover { transform: translateY(-8px); box-shadow: var(--shadow-lg); }
+  .post:focus-within { box-shadow: 0 0 0 3px var(--teal-ink), var(--shadow-lg); }
+  .cover { position: relative; height: 180px; display: grid; place-items: center; font-family: var(--serif); font-size: 72px; font-weight: 700; color: rgba(255,255,255,.94); overflow: hidden; }
+  .cover span { transition: transform .8s var(--ease); }
+  .post:hover .cover span { transform: scale(1.12) rotate(-3deg); }
+  .cover::after { content: ''; position: absolute; inset: 0; background: linear-gradient(110deg, transparent 35%, rgba(255,255,255,.25) 50%, transparent 65%); transform: translateX(-100%); transition: transform 1s var(--ease); }
+  .post:hover .cover::after { transform: translateX(100%); }
+  .rose { background: linear-gradient(135deg, #800020, #CC3466); }
+  .teal { background: linear-gradient(135deg, #1B716B, #2DA9A0); }
+  .night { background: linear-gradient(135deg, #3B2A2E, #800020); }
+  .body { padding: 22px 24px 28px; }
+  .meta { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; color: var(--teal-ink); font-weight: 600; font-size: 12px; letter-spacing: .06em; text-transform: uppercase; }
+  .draft { background: #FFF1D6; color: #7A5A0E; border-radius: 6px; padding: 2px 8px; letter-spacing: .04em; }
+  .title { font-size: 26px; margin: 10px 0 8px; }
+  .title a { text-decoration: none; }
+  /* whole card is clickable via the title link */
+  .title a::after { content: ''; position: absolute; inset: 0; }
+  .title a:focus-visible { outline: none; }
+  .desc { color: var(--muted); font-size: 15px; }
+</style>

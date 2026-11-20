@@ -1,0 +1,128 @@
+---
+import Logo from './Logo.astro';
+import { languages, langs, localize, t, type Lang } from '../i18n/utils';
+interface Props { lang: Lang; path: string; translated: boolean }
+const { lang, path, translated } = Astro.props;
+const s = t(lang).nav;
+const home = localize(lang, '/');
+const links = [
+  { href: `${home}#learn`, label: s.learn },
+  { href: `${home}#ai`, label: s.ai },
+  { href: `${home}#privacy`, label: s.data },
+  { href: localize(lang, '/research/'), label: s.research },
+  { href: localize(lang, '/blog/'), label: s.blog },
+];
+---
+<header class="nav" data-nav>
+  <div class="wrap nav-row">
+    <a href={home} class="brand" aria-label={s.home}>
+      <Logo id="nav-logo" class="brand-mark" />
+      <span>CycleBuddy</span>
+    </a>
+
+    <button class="menu-btn" type="button" aria-expanded="false" aria-controls="nav-panel" data-open={s.menu} data-close={s.close}>
+      <span class="sr-only">{s.menu}</span>
+      <span class="bars" aria-hidden="true"><i></i><i></i><i></i></span>
+    </button>
+
+    <nav class="nav-panel" id="nav-panel" aria-label="Main">
+      <ul class="nav-links" role="list">
+        {links.map((l) => <li><a href={l.href}>{l.label}</a></li>)}
+      </ul>
+      <div class="nav-end">
+        <ul class="lang" role="list" aria-label={s.language}>
+          {langs.map((l) => (
+            <li>
+              <a
+                href={translated ? localize(l, path) : localize(l, '/')}
+                hreflang={languages[l].hreflang}
+                lang={languages[l].hreflang}
+                aria-current={l === lang ? 'true' : undefined}
+                title={languages[l].label}
+              >
+                <span aria-hidden="true">{languages[l].short}</span>
+                <span class="sr-only">{languages[l].label}</span>
+              </a>
+            </li>
+          ))}
+        </ul>
+        <a href={`${home}#waitlist`} class="btn btn-primary nav-cta">{s.cta}</a>
+      </div>
+    </nav>
+  </div>
+</header>
+
+<style>
+  .nav {
+    position: sticky; top: 0; z-index: 50;
+    background: rgba(249, 238, 228, .78);
+    backdrop-filter: saturate(1.4) blur(14px); -webkit-backdrop-filter: saturate(1.4) blur(14px);
+    border-bottom: 1px solid transparent;
+    transition: border-color .3s, box-shadow .3s, background-color .3s;
+  }
+  .nav.scrolled { border-color: var(--line); box-shadow: 0 10px 30px -24px rgba(128, 0, 32, .5); background: rgba(249, 238, 228, .92); }
+  .nav-row { display: flex; align-items: center; justify-content: space-between; height: var(--nav-h); gap: 20px; }
+  .brand { display: inline-flex; align-items: center; gap: 10px; text-decoration: none; font-family: var(--serif); font-weight: 700; font-size: 25px; color: var(--burgundy); letter-spacing: -.01em; }
+  .brand :global(.brand-mark) { width: 36px; height: auto; transition: transform .5s var(--ease); }
+  .brand:hover :global(.brand-mark) { transform: rotate(-8deg) scale(1.06); }
+  :global(.intro-playing .brand-mark) { opacity: 0; }
+
+  .nav-panel { display: flex; align-items: center; gap: 28px; }
+  .nav-links { display: flex; gap: 26px; list-style: none; }
+  .nav-links a { position: relative; text-decoration: none; font-size: 15px; font-weight: 500; color: var(--ink); padding: 6px 0; }
+  .nav-links a::after { content: ''; position: absolute; left: 0; right: 0; bottom: 0; height: 2px; border-radius: 2px; background: var(--grad); transform: scaleX(0); transform-origin: right; transition: transform .35s var(--ease); }
+  .nav-links a:hover { color: var(--burgundy); }
+  .nav-links a:hover::after { transform: scaleX(1); transform-origin: left; }
+  .nav-end { display: flex; align-items: center; gap: 18px; }
+  .lang { display: flex; gap: 2px; list-style: none; padding: 3px; border-radius: 999px; background: rgba(255,255,255,.7); border: 1px solid var(--line); }
+  .lang a { display: grid; place-items: center; min-width: 36px; height: 30px; padding: 0 8px; border-radius: 999px; font-size: 12px; font-weight: 700; letter-spacing: .06em; color: var(--muted); text-decoration: none; transition: background-color .2s, color .2s; }
+  .lang a:hover { color: var(--burgundy); }
+  .lang a[aria-current='true'] { background: var(--burgundy); color: #fff; }
+  .nav-cta { min-height: 42px; padding: 10px 20px; font-size: 14px; }
+
+  .menu-btn { display: none; width: 46px; height: 46px; border-radius: 14px; border: 1px solid var(--line); background: #fff; cursor: pointer; place-items: center; }
+  .bars { display: grid; gap: 5px; width: 20px; }
+  .bars i { display: block; height: 2px; border-radius: 2px; background: var(--burgundy); transition: transform .3s var(--ease), opacity .2s; }
+  .menu-btn[aria-expanded='true'] .bars i:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+  .menu-btn[aria-expanded='true'] .bars i:nth-child(2) { opacity: 0; }
+  .menu-btn[aria-expanded='true'] .bars i:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+  @media (max-width: 980px) {
+    :global(.js) .menu-btn { display: grid; }
+    :global(.js) .nav-panel {
+      position: fixed; inset: var(--nav-h) 0 auto 0; z-index: 49;
+      flex-direction: column; align-items: stretch; gap: 22px;
+      background: var(--ivory); border-bottom: 1px solid var(--line);
+      padding: 18px clamp(16px, 4vw, 32px) 28px; box-shadow: 0 30px 60px -30px rgba(128,0,32,.35);
+      max-height: calc(100dvh - var(--nav-h)); overflow-y: auto;
+      opacity: 0; transform: translateY(-12px); visibility: hidden;
+      transition: opacity .3s var(--ease), transform .3s var(--ease), visibility 0s .3s;
+    }
+    :global(.js) .nav.open .nav-panel { opacity: 1; transform: none; visibility: visible; transition-delay: 0s; }
+    :global(.js) .nav-links { flex-direction: column; gap: 0; }
+    :global(.js) .nav-links a { display: block; font-family: var(--serif); font-size: 28px; font-weight: 600; color: var(--burgundy); padding: 10px 0; border-bottom: 1px solid var(--line); }
+    :global(.js) .nav-links a::after { display: none; }
+    :global(.js) .nav-end { justify-content: space-between; flex-wrap: wrap; }
+    /* Without JS, links wrap under the brand instead of hiding behind a menu button */
+    :global(.no-js) .nav-row { height: auto; flex-wrap: wrap; padding-block: 12px; }
+    :global(.no-js) .nav-panel { flex-wrap: wrap; gap: 12px; }
+    :global(.no-js) .nav-links { flex-wrap: wrap; gap: 14px; }
+  }
+</style>
+
+<script>
+  const nav = document.querySelector<HTMLElement>('[data-nav]')!;
+  const btn = nav.querySelector<HTMLButtonElement>('.menu-btn')!;
+  const label = btn.querySelector('.sr-only')!;
+  const setOpen = (open: boolean) => {
+    nav.classList.toggle('open', open);
+    btn.setAttribute('aria-expanded', String(open));
+    label.textContent = open ? btn.dataset.close! : btn.dataset.open!;
+  };
+  btn.addEventListener('click', () => setOpen(!nav.classList.contains('open')));
+  nav.querySelectorAll('.nav-panel a').forEach((a) => a.addEventListener('click', () => setOpen(false)));
+  document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && nav.classList.contains('open')) { setOpen(false); btn.focus(); } });
+  const onScroll = () => nav.classList.toggle('scrolled', window.scrollY > 8);
+  onScroll();
+  window.addEventListener('scroll', onScroll, { passive: true });
+</script>

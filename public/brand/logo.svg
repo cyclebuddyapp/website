@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="-2 52 1038 906" role="img" aria-label="CycleBuddy">
+<defs>
+<linearGradient id="cb-g" gradientUnits="userSpaceOnUse" x1="80" y1="80" x2="940" y2="940"><stop offset="0" stop-color="#CC3466"/><stop offset="1" stop-color="#800020"/></linearGradient>
+<mask id="cb-m" maskUnits="userSpaceOnUse" x="-50" y="-50" width="1124" height="1124"><rect x="-50" y="-50" width="1124" height="1124" fill="#fff"/><path d="M 82 668 C 76 760 120 862 225 862 C 310 862 390 795 480 722 C 600 625 760 545 870 478" fill="none" stroke="#000" stroke-width="124"/></mask>
+</defs>
+<g fill="none" stroke="url(#cb-g)" stroke-width="96" stroke-linecap="round" stroke-linejoin="round">
+<path d="M 870 478 C 1000 400 1012 250 920 162 C 832 82 700 95 620 175 L 538 258 Q 510 286 482 258 L 400 175 C 320 95 190 90 110 165 C 25 245 40 360 135 445 L 480 728 C 565 812 640 902 745 902 C 865 902 945 820 932 712 C 926 640 900 585 862 540" mask="url(#cb-m)"/>
+<path d="M 82 668 C 76 760 120 862 225 862 C 310 862 390 795 480 722 C 600 625 760 545 870 478"/>
+</g>
+</svg>

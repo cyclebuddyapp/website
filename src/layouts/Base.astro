@@ -1,0 +1,108 @@
+---
+// Every page uses this layout: <head> (SEO, hreflang, fonts, JSON-LD), nav, main, footer.
+import '@fontsource/cormorant-garamond/500.css';
+import '@fontsource/cormorant-garamond/600.css';
+import '@fontsource/cormorant-garamond/700.css';
+import '@fontsource/cormorant-garamond/600-italic.css';
+import '@fontsource/inter/400.css';
+import '@fontsource/inter/500.css';
+import '@fontsource/inter/600.css';
+import '@fontsource/inter/700.css';
+import '../styles/global.css';
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+import { languages, langs, localize, stripLang, t, type Lang } from '../i18n/utils';
+
+interface Props {
+  lang: Lang;
+  title: string;
+  description: string;
+  /** Path without language prefix, e.g. "/" or "/blog/my-post/". Used for canonical + hreflang. */
+  path?: string;
+  /** Set false for pages that only exist in one language. */
+  translated?: boolean;
+  /** JSON-LD objects for this page. */
+  schema?: object[];
+  /** Path to a Markdown twin of this page, e.g. "/privacy.md". */
+  markdown?: string;
+  ogType?: 'website' | 'article';
+  intro?: boolean;
+  noindex?: boolean;
+}
+
+const {
+  lang, title, description, translated = true, schema = [], markdown, ogType = 'website', intro = false, noindex = false,
+} = Astro.props;
+const path = Astro.props.path ?? stripLang(Astro.url.pathname);
+const site = Astro.site!;
+const canonical = new URL(localize(lang, path), site).href;
+const ogImage = new URL('/og.png', site).href;
+---
+<!doctype html>
+<html lang={languages[lang].hreflang} class="no-js">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    {noindex && <meta name="robots" content="noindex" />}
+    {translated && langs.map((l) => (
+      <link rel="alternate" hreflang={languages[l].hreflang} href={new URL(localize(l, path), site).href} />
+    ))}
+    {translated && <link rel="alternate" hreflang="x-default" href={new URL(localize('en', path), site).href} />}
+    {markdown && <link rel="alternate" type="text/markdown" href={markdown} />}
+    <link rel="alternate" type="text/plain" title="llms.txt" href="/llms.txt" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="sitemap" href="/sitemap-index.xml" />
+    <meta name="theme-color" content="#F9EEE4" />
+
+    <meta property="og:type" content={ogType} />
+    <meta property="og:site_name" content="CycleBuddy" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:locale" content={languages[lang].ogLocale} />
+    <meta name="twitter:card" content="summary_large_image" />
+
+    {schema.map((s) => <script type="application/ld+json" set:html={JSON.stringify(s)} />)}
+
+    <!-- Runs before first paint: marks JS as available and decides whether the intro plays.
+         The intro plays once per browser session, never with reduced motion. No data leaves the browser. -->
+    <script is:inline define:vars={{ intro }}>
+      var d = document.documentElement;
+      d.classList.remove('no-js'); d.classList.add('js');
+      if (intro) {
+        var seen = false;
+        try { seen = sessionStorage.getItem('cb-intro') === '1'; } catch (e) {}
+        var reduce = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
+        if (!seen && !reduce) d.classList.add('intro-playing');
+      }
+    </script>
+  </head>
+  <body>
+    <a class="skip" href="#main">{t(lang).nav.skip}</a>
+    <div class="progress" aria-hidden="true"></div>
+    <slot name="before" />
+    <Nav lang={lang} path={path} translated={translated} />
+    <main id="main" tabindex="-1">
+      <slot />
+    </main>
+    <Footer lang={lang} />
+
+    <script>
+      // Gentle scroll reveals: elements with .reveal / .reveal-scale fade and rise into view.
+      const els = document.querySelectorAll<HTMLElement>('.reveal, .reveal-scale');
+      if ('IntersectionObserver' in window) {
+        const io = new IntersectionObserver((entries) => {
+          for (const e of entries) if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
+        }, { rootMargin: '0px 0px -8% 0px', threshold: 0.12 });
+        els.forEach((el) => io.observe(el));
+      } else {
+        els.forEach((el) => el.classList.add('in'));
+      }
+    </script>
+  </body>
+</html>

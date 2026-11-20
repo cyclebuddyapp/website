@@ -1,0 +1,11 @@
+---
+import { t, type Lang } from '../i18n/utils';
+interface Props { lang: Lang }
+const items = t(Astro.props.lang).marquee;
+---
+<div class="marquee" aria-hidden="true">
+  <div class="marquee-track">
+    <ul>{items.map((x) => <li>{x}</li>)}</ul>
+    <ul>{items.map((x) => <li>{x}</li>)}</ul>
+  </div>
+</div>

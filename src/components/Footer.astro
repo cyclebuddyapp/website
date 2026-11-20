@@ -1,0 +1,56 @@
+---
+import Logo from './Logo.astro';
+import { localize, t, type Lang } from '../i18n/utils';
+interface Props { lang: Lang }
+const { lang } = Astro.props;
+const s = t(lang);
+const home = localize(lang, '/');
+const year = new Date().getFullYear();
+---
+<footer class="footer">
+  <div class="wrap">
+    <div class="top">
+      <div class="about">
+        <a href={home} class="f-brand" aria-label={s.nav.home}>
+          <Logo id="footer-logo" class="f-mark" />
+          <span>CycleBuddy</span>
+        </a>
+        <p class="tag">{s.footer.tagline}</p>
+        <p class="contact"><a href="mailto:hello@cyclebuddy.ca">hello@cyclebuddy.ca</a></p>
+      </div>
+      <nav aria-label={s.footer.pages}>
+        <ul role="list" class="cols">
+          <li><a href={`${home}#learn`}>{s.nav.learn}</a></li>
+          <li><a href={`${home}#ai`}>{s.nav.ai}</a></li>
+          <li><a href={`${home}#privacy`}>{s.nav.data}</a></li>
+          <li><a href={localize(lang, '/research/')}>{s.nav.research}</a></li>
+          <li><a href={localize(lang, '/blog/')}>{s.nav.blog}</a></li>
+          <li><a href={localize(lang, '/facts/')}>{s.footer.facts}</a></li>
+          <li><a href={localize(lang, '/faq/')}>{s.footer.faq}</a></li>
+          <li><a href={localize(lang, '/privacy/')}>{s.footer.privacy}</a></li>
+        </ul>
+      </nav>
+    </div>
+    <div class="bottom">
+      <span>© {year} CycleBuddy · {s.footer.location}</span>
+      <span class="note"><i aria-hidden="true"></i>{s.footer.note}</span>
+    </div>
+  </div>
+</footer>
+
+<style>
+  .footer { border-top: 1px solid var(--line); padding: 56px 0 30px; background: var(--ivory-2); font-size: 14px; color: var(--muted); }
+  .top { display: grid; grid-template-columns: 1fr 1.4fr; gap: 40px; padding-bottom: 36px; }
+  .f-brand { display: inline-flex; align-items: center; gap: 10px; font-family: var(--serif); font-size: 26px; font-weight: 700; color: var(--burgundy); text-decoration: none; }
+  .f-brand :global(.f-mark) { width: 38px; height: auto; }
+  .tag { font-family: var(--serif); font-style: italic; font-size: 20px; color: var(--burgundy); margin-top: 10px; }
+  .contact { margin-top: 8px; }
+  .contact a, .cols a { color: var(--ink); text-decoration: none; }
+  .contact a:hover, .cols a:hover { color: var(--pink-ink); text-decoration: underline; text-underline-offset: 3px; }
+  .cols { list-style: none; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px 24px; align-content: start; }
+  .bottom { display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; border-top: 1px solid var(--line); padding-top: 22px; }
+  .note { display: inline-flex; align-items: center; gap: 8px; }
+  .note i { width: 8px; height: 8px; border-radius: 50%; background: var(--teal); box-shadow: 0 0 0 4px var(--teal-soft); }
+  @media (min-width: 640px) { .cols { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
+  @media (max-width: 760px) { .top { grid-template-columns: 1fr; } }
+</style>

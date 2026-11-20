@@ -1,0 +1,80 @@
+---
+import Icon from '../Icon.astro';
+import { t, type Lang } from '../../i18n/utils';
+interface Props { lang: Lang }
+const s = t(Astro.props.lang).ai;
+---
+<section class="ai" id="ai">
+  <div class="wrap top">
+    <div>
+      <p class="eyebrow reveal">{s.eyebrow}</p>
+      <h2 class="reveal" style="--i:1">{s.h}</h2>
+      <p class="lead reveal" style="--i:2">{s.p}</p>
+      <ul class="checks" role="list">
+        {s.checks.map((c, i) => <li class="reveal" style={`--i:${i + 3}`}><span class="ck" aria-hidden="true"><Icon name="check" size={14} /></span>{c}</li>)}
+      </ul>
+    </div>
+
+    <div class="device reveal-scale" style="--i:2">
+      <span class="device-tag"><Icon name="phone" size={14} />{s.device}</span>
+      <div class="flow-wrap">
+        <span class="pulse" aria-hidden="true"></span>
+        <ol class="flow" role="list">
+          {s.flow.map((f, i) => (
+            <li class="step" style={`--k:${i}`}>
+              <span class="dot" aria-hidden="true">{i + 1}</span>
+              <div><b>{f.b}</b><small>{f.s}</small></div>
+            </li>
+          ))}
+        </ol>
+      </div>
+    </div>
+  </div>
+
+  <div class="wrap">
+    <ol class="principles" role="list">
+      {s.principles.map((p, i) => (
+        <li class="pr reveal" style={`--i:${i}`}>
+          <span class="k">0{i + 1}</span>
+          <h3>{p.h}</h3>
+          <p>{p.p}</p>
+        </li>
+      ))}
+    </ol>
+  </div>
+</section>
+
+<style>
+  .top { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(40px, 6vw, 80px); align-items: center; }
+  .lead { margin-top: 18px; }
+  .checks { list-style: none; margin-top: 28px; display: grid; gap: 14px; }
+  .checks li { display: flex; gap: 12px; align-items: flex-start; font-size: 16px; }
+  .ck { flex: none; width: 24px; height: 24px; border-radius: 50%; display: grid; place-items: center; background: var(--teal-soft); color: var(--teal-ink); margin-top: 1px; }
+
+  /* The dashed "device" boundary: animated marching border, nothing crosses it */
+  .device { position: relative; padding: 52px clamp(16px, 3vw, 28px) 28px; border-radius: 32px; background: rgba(255,255,255,.45); border: 2px dashed var(--teal); }
+  .device-tag { position: absolute; top: -16px; left: 50%; translate: -50% 0; display: inline-flex; align-items: center; gap: 8px; background: var(--ivory); border: 1px solid var(--teal); color: var(--teal-ink); font-size: 13px; font-weight: 600; padding: 6px 14px; border-radius: 999px; width: max-content; max-width: calc(100% - 24px); text-align: center; }
+  .flow-wrap { position: relative; }
+  .flow-wrap::before { content: ''; position: absolute; left: 39px; top: 36px; bottom: 36px; width: 2px; background: var(--beige); z-index: 1; }
+  .pulse { position: absolute; z-index: 2; left: 34px; top: 30px; width: 12px; height: 12px; border-radius: 50%; background: var(--pink); box-shadow: 0 0 0 6px rgba(204,52,102,.18); animation: travel 4.5s var(--ease) infinite; }
+  @keyframes travel { 0% { top: 30px; opacity: 0; } 10%, 85% { opacity: 1; } 100% { top: calc(100% - 42px); opacity: 0; } }
+  .flow { display: grid; gap: 18px; list-style: none; }
+  .step { position: relative; display: flex; align-items: center; gap: 16px; background: var(--white); border-radius: 20px; padding: 18px 20px; box-shadow: var(--shadow); animation: glow 4.5s var(--ease) infinite; animation-delay: calc(var(--k) * 1.35s); }
+  @keyframes glow { 0%, 30%, 100% { box-shadow: var(--shadow); } 12% { box-shadow: 0 0 0 2px var(--pink-soft), 0 20px 40px -22px rgba(204,52,102,.7); } }
+  .dot { position: relative; z-index: 3; flex: none; width: 38px; height: 38px; border-radius: 50%; background: var(--pink-soft); color: var(--burgundy); display: grid; place-items: center; font-weight: 700; font-size: 14px; }
+  .step b { display: block; font-size: 15.5px; }
+  .step small { color: var(--muted); font-size: 14px; }
+
+  .principles { display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; margin-top: clamp(60px, 8vw, 90px); list-style: none; }
+  .pr { position: relative; background: var(--white); border-radius: var(--r); padding: 30px 26px; border: 1px solid #F1E4DA; box-shadow: var(--shadow); overflow: hidden; transition: transform .4s var(--ease), box-shadow .4s var(--ease); }
+  .pr::before { content: ''; position: absolute; left: 0; right: 0; top: 0; height: 4px; background: var(--grad); transform: scaleX(.25); transform-origin: left; transition: transform .6s var(--ease); }
+  .pr:nth-child(even)::before { background: linear-gradient(90deg, var(--teal-ink), var(--teal)); }
+  .pr:hover { transform: translateY(-6px); box-shadow: var(--shadow-lg); }
+  .pr:hover::before { transform: scaleX(1); }
+  .k { font-size: 12px; font-weight: 700; letter-spacing: .14em; color: var(--teal-ink); }
+  .pr h3 { font-size: 32px; margin: 8px 0; }
+  .pr p { color: var(--muted); font-size: 15px; }
+  @media (max-width: 980px) { .principles { grid-template-columns: 1fr 1fr; } }
+  @media (max-width: 860px) { .top { grid-template-columns: 1fr; } }
+  @media (max-width: 560px) { .principles { grid-template-columns: 1fr; } }
+</style>

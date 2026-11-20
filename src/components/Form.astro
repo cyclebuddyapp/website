@@ -1,0 +1,119 @@
+---
+// One component for the three forms. Plain, labelled HTML so it works without JS and for agents.
+// With JS: validates in the page, posts JSON to the Worker and shows the result inline (no alerts, no reload).
+import { FORMS_ENDPOINT } from '../data/site';
+import { localize, t, type Lang } from '../i18n/utils';
+interface Props { kind: 'waitlist' | 'contact' | 'partner'; lang: Lang; id: string }
+const { kind, lang, id } = Astro.props;
+const f = t(lang).form;
+const action = FORMS_ENDPOINT ? `${FORMS_ENDPOINT.replace(/\/$/, '')}/${kind}` : 'mailto:hello@cyclebuddy.ca';
+const submit = kind === 'waitlist' ? f.submitWaitlist : kind === 'contact' ? f.submitContact : f.submitPartner;
+const ok = kind === 'waitlist' ? f.okWaitlist : f.okContact;
+---
+<form
+  class="cb-form" id={id} action={action} method="post" novalidate
+  data-endpoint={FORMS_ENDPOINT ? action : ''}
+  data-ok={ok} data-err={f.errGeneric} data-err-email={f.errEmail} data-err-required={f.errRequired} data-err-rate={f.errRate} data-sending={f.sending}
+>
+  <input type="hidden" name="language" value={lang} />
+  <input type="hidden" name="redirect" value={localize(lang, '/') } />
+
+  {(kind === 'contact' || kind === 'partner') && (
+    <div class="field">
+      <label for={`${id}-name`}>{f.name}</label>
+      <input id={`${id}-name`} name="name" type="text" autocomplete="name" required maxlength="120" />
+      <p class="err" id={`${id}-name-err`} aria-live="polite"></p>
+    </div>
+  )}
+  {kind === 'partner' && (
+    <div class="field">
+      <label for={`${id}-institution`}>{f.institution}</label>
+      <input id={`${id}-institution`} name="institution" type="text" autocomplete="organization" required maxlength="160" />
+      <p class="err" id={`${id}-institution-err`} aria-live="polite"></p>
+    </div>
+  )}
+  <div class="field">
+    <label for={`${id}-email`}>{f.email}</label>
+    <input id={`${id}-email`} name="email" type="email" autocomplete="email" inputmode="email" required maxlength="254" />
+    <p class="err" id={`${id}-email-err`} aria-live="polite"></p>
+  </div>
+  {kind === 'waitlist' && (
+    <div class="field">
+      <label for={`${id}-country`}>{f.country}</label>
+      <input id={`${id}-country`} name="country" type="text" autocomplete="country-name" maxlength="80" />
+    </div>
+  )}
+  {(kind === 'contact' || kind === 'partner') && (
+    <div class="field">
+      <label for={`${id}-message`}>{f.message}</label>
+      <textarea id={`${id}-message`} name="message" required maxlength="5000"></textarea>
+      <p class="err" id={`${id}-message-err`} aria-live="polite"></p>
+    </div>
+  )}
+
+  <!-- Honeypot: hidden from people, bots tend to fill it in -->
+  <div class="hp" aria-hidden="true">
+    <label for={`${id}-website`}>{f.honeypot}</label>
+    <input id={`${id}-website`} name="website" type="text" tabindex="-1" autocomplete="off" />
+  </div>
+
+  <button class="btn btn-primary" type="submit">{submit}</button>
+  <p class="form-status" role="status" aria-live="polite"></p>
+  <p class="form-note">{kind === 'waitlist' ? f.privacyNoteWaitlist : f.privacyNote} <a href={localize(lang, '/privacy/')}>{f.privacyLink}</a></p>
+</form>
+
+<style>
+  .cb-form { position: relative; display: grid; gap: 16px; }
+  .cb-form .btn { justify-self: start; }
+  .cb-form .btn[disabled] { opacity: .7; cursor: progress; transform: none; }
+</style>
+
+<script>
+  const EMAIL = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
+  document.querySelectorAll<HTMLFormElement>('form.cb-form').forEach((form) => {
+    const status = form.querySelector<HTMLElement>('.form-status')!;
+    const btn = form.querySelector<HTMLButtonElement>('button[type=submit]')!;
+    const d = form.dataset;
+
+    const setErr = (input: HTMLInputElement | HTMLTextAreaElement, msg: string) => {
+      const err = form.querySelector<HTMLElement>(`#${input.id}-err`);
+      input.setAttribute('aria-invalid', msg ? 'true' : 'false');
+      if (err) { err.textContent = msg; if (msg) input.setAttribute('aria-describedby', err.id); }
+    };
+    const validate = () => {
+      let first: HTMLElement | null = null;
+      form.querySelectorAll<HTMLInputElement | HTMLTextAreaElement>('[required]').forEach((el) => {
+        let msg = '';
+        if (!el.value.trim()) msg = d.errRequired!;
+        else if (el.type === 'email' && !EMAIL.test(el.value.trim())) msg = d.errEmail!;
+        setErr(el, msg);
+        if (msg && !first) first = el;
+      });
+      if (first) (first as HTMLElement).focus();
+      return !first;
+    };
+    form.querySelectorAll<HTMLInputElement | HTMLTextAreaElement>('[required]').forEach((el) =>
+      el.addEventListener('blur', () => { if (el.getAttribute('aria-invalid') === 'true') validate(); }));
+
+    const show = (kind: 'ok' | 'error', msg: string) => { status.className = `form-status ${kind}`; status.textContent = msg; };
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      if (!validate()) return;
+      if (!d.endpoint) { show('error', d.err!); return; }
+      const label = btn.textContent;
+      btn.disabled = true; btn.textContent = d.sending!;
+      try {
+        const body = Object.fromEntries(new FormData(form).entries());
+        delete (body as Record<string, unknown>).redirect;
+        const res = await fetch(d.endpoint, { method: 'POST', headers: { 'Content-Type': 'application/json', Accept: 'application/json' }, body: JSON.stringify(body) });
+        if (res.ok) { form.reset(); show('ok', d.ok!); }
+        else show('error', res.status === 429 ? d.errRate! : d.err!);
+      } catch {
+        show('error', d.err!);
+      } finally {
+        btn.disabled = false; btn.textContent = label;
+      }
+    });
+  });
+</script>

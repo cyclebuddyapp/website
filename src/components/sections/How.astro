@@ -1,0 +1,44 @@
+---
+import Icon from '../Icon.astro';
+import { t, type Lang } from '../../i18n/utils';
+interface Props { lang: Lang }
+const s = t(Astro.props.lang).how;
+const icons = ['calendar', 'book', 'sparkle'] as const;
+---
+<section class="how" id="how">
+  <div class="wrap center">
+    <p class="eyebrow reveal">{s.eyebrow}</p>
+    <h2 class="reveal" style="--i:1">{s.h}</h2>
+    <div class="steps-wrap">
+    <span class="line reveal" aria-hidden="true"></span>
+    <ol class="steps" role="list">
+      {s.items.map((it, i) => (
+        <li class="card step reveal" style={`--i:${i + 1}`}>
+          <span class="num" aria-hidden="true">0{i + 1}</span>
+          <span class="badge" aria-hidden="true"><Icon name={icons[i]} size={24} /></span>
+          <h3>{it.h}</h3>
+          <p>{it.p}</p>
+        </li>
+      ))}
+    </ol>
+    </div>
+  </div>
+</section>
+
+<style>
+  .how { padding-top: clamp(50px, 6vw, 80px); }
+  .steps-wrap { position: relative; margin-top: 60px; }
+  .steps { position: relative; display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; text-align: left; list-style: none; }
+  .line { position: absolute; top: 62px; left: 12%; right: 12%; height: 2px; background: linear-gradient(90deg, var(--pink), var(--teal), var(--burgundy)); z-index: 0; }
+  :global(.js) .line.reveal { opacity: 1; transform: scaleX(0); transform-origin: left; transition: transform 1.6s var(--ease) .3s; }
+  :global(.js) .line.reveal.in { transform: scaleX(1); }
+  .step { position: relative; z-index: 1; overflow: hidden; }
+  .num { position: absolute; right: 22px; top: 12px; font-family: var(--serif); font-size: 76px; font-weight: 700; line-height: 1; color: var(--pink-soft); transition: color .4s, transform .6s var(--ease); }
+  .step:hover .num { color: #F2C4D2; transform: translateY(-4px) rotate(-4deg); }
+  .badge { width: 54px; height: 54px; border-radius: 16px; display: grid; place-items: center; color: #fff; background: var(--grad); box-shadow: 0 12px 24px -12px rgba(204,52,102,.8); margin-bottom: 22px; transition: transform .5s var(--ease); }
+  .step:nth-child(3) .badge { background: linear-gradient(135deg, var(--teal-ink), var(--teal)); box-shadow: 0 12px 24px -12px rgba(45,169,160,.8); }
+  .step:hover .badge { transform: rotate(-8deg) scale(1.06); }
+  .step h3 { margin-bottom: 10px; }
+  .step p { color: var(--muted); font-size: 15.5px; }
+  @media (max-width: 860px) { .steps { grid-template-columns: 1fr; } .line { display: none; } }
+</style>

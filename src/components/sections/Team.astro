@@ -1,0 +1,58 @@
+---
+import { Image } from 'astro:assets';
+import brady from '../../assets/brady.jpg';
+import stellar from '../../assets/stellar-win.png';
+import { t, type Lang } from '../../i18n/utils';
+interface Props { lang: Lang }
+const s = t(Astro.props.lang).team;
+---
+<section class="team" id="team">
+  <div class="wrap">
+    <div class="center">
+      <p class="eyebrow reveal">{s.eyebrow}</p>
+      <h2 class="reveal" style="--i:1">{s.h}</h2>
+    </div>
+    <div class="duo">
+      <article class="person reveal" style="--i:0">
+        <div class="ph">
+          <Image src={brady} alt={s.photoAlt} width={260} height={260}  densities={[1, 2]} />
+        </div>
+        <h3>Brady</h3>
+        <p class="role">{s.role}</p>
+        <p class="bio">{s.bio}</p>
+      </article>
+      <article class="award reveal" style="--i:1">
+        <div class="img">
+          <Image src={stellar} alt={s.awardAlt} widths={[400, 790]} sizes="(max-width: 860px) 100vw, 560px" />
+          <span class="medal" aria-hidden="true">#1</span>
+        </div>
+        <div class="txt">
+          <h3>{s.awardH}</h3>
+          <p>{s.awardP}</p>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<style>
+  .team { padding-top: clamp(40px, 5vw, 60px); }
+  .duo { display: grid; grid-template-columns: 1fr 1fr; gap: 22px; margin-top: 50px; }
+  .person, .award { background: var(--white); border-radius: var(--r); box-shadow: var(--shadow); border: 1px solid #F1E4DA; overflow: hidden; }
+  .person { padding: 40px 34px; display: flex; flex-direction: column; align-items: center; text-align: center; justify-content: center; }
+  .ph { position: relative; width: 130px; height: 130px; }
+  .ph::before { content: ''; position: absolute; inset: -8px; border-radius: 50%; background: conic-gradient(from 0deg, var(--pink), var(--teal), var(--burgundy), var(--pink)); animation: spin 10s linear infinite; }
+  .ph :global(img) { position: relative; width: 130px; height: 130px; border-radius: 50%; object-fit: cover; border: 4px solid #fff; }
+  @keyframes spin { to { rotate: 360deg; } }
+  .person h3 { margin-top: 20px; font-size: 32px; }
+  .role { color: var(--pink-ink); font-weight: 600; font-size: 14px; }
+  .bio { color: var(--muted); font-size: 15px; margin-top: 12px; max-width: 420px; }
+  .img { position: relative; overflow: hidden; }
+  .img :global(img) { width: 100%; height: 280px; object-fit: cover; transition: transform 1.2s var(--ease); }
+  .award:hover .img :global(img) { transform: scale(1.05); }
+  .medal { position: absolute; top: 16px; right: 16px; width: 58px; height: 58px; border-radius: 50%; display: grid; place-items: center; font-family: var(--serif); font-style: italic; font-weight: 700; font-size: 20px; color: #fff; background: var(--grad); box-shadow: 0 10px 20px -8px rgba(128,0,32,.6); animation: bobm 4s ease-in-out infinite; }
+  @keyframes bobm { 50% { transform: translateY(-5px) rotate(-6deg); } }
+  .txt { padding: 26px 30px 30px; }
+  .txt p { color: var(--muted); font-size: 15px; margin-top: 6px; }
+  @media (max-width: 860px) { .duo { grid-template-columns: 1fr; } }
+</style>

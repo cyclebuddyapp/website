@@ -1,0 +1,94 @@
+---
+// First-visit intro (home pages only). Shown only when the inline head script adds
+// .intro-playing to <html>: never without JS, never with reduced motion, once per session.
+import Logo from './Logo.astro';
+import { t, type Lang } from '../i18n/utils';
+interface Props { lang: Lang }
+const s = t(Astro.props.lang).intro;
+---
+<div id="intro" aria-hidden="true">
+  <div class="mark">
+    <Logo id="intro-logo" class="intro-logo" />
+    <div class="word">CycleBuddy</div>
+  </div>
+  <p class="hint">{s.skip}</p>
+</div>
+
+<style>
+  #intro { display: none; }
+  :global(.intro-playing) #intro {
+    display: grid; place-items: center; position: fixed; inset: 0; z-index: 100; cursor: pointer;
+    background: radial-gradient(circle at 50% 45%, #FFF8F2 0%, var(--ivory) 60%);
+    transition: opacity .7s ease, background-color .7s;
+  }
+  #intro.out { opacity: 0; pointer-events: none; }
+  .mark { display: flex; flex-direction: column; align-items: center; gap: 22px; transform-origin: center; }
+  :global(.intro-logo) { width: min(220px, 46vw); height: auto; overflow: visible; filter: drop-shadow(0 18px 30px rgba(128,0,32,.18)); }
+
+  /* Draw the single line: strand A (tail + rising strand) first, then B (heart and infinity loop). */
+  :global(.intro-logo .a), :global(.intro-logo .b), :global(.intro-logo .mask-a) { stroke-dasharray: 1; stroke-dashoffset: 1; }
+  :global(.intro-logo .a), :global(.intro-logo .mask-a) { animation: cb-draw .55s cubic-bezier(.55,0,.75,.4) .15s forwards; }
+  :global(.intro-logo .b) { animation: cb-draw 1.45s cubic-bezier(.2,.4,.3,1) .7s forwards; }
+
+  .word {
+    font-family: var(--serif); font-style: italic; font-weight: 600; font-size: clamp(44px, 9vw, 72px);
+    color: var(--burgundy); line-height: 1; padding: 0 .1em;
+    clip-path: inset(0 100% 0 0); animation: cb-write 1s cubic-bezier(.6,0,.3,1) 1.75s forwards;
+  }
+  .hint { position: absolute; bottom: 28px; font-size: 13px; color: var(--muted); opacity: 0; animation: cb-fade .6s ease 1s forwards; }
+  #intro.flying .word, #intro.flying .hint { opacity: 0; transition: opacity .35s ease; }
+  #intro.flying .mark { transition: transform .9s cubic-bezier(.7,0,.2,1); }
+
+  @keyframes cb-draw { to { stroke-dashoffset: 0; } }
+  @keyframes cb-write { to { clip-path: inset(0 0 0 0); } }
+  @keyframes cb-fade { to { opacity: 1; } }
+
+  /* Page waits behind the intro, then fades in */
+  :global(.intro-playing main), :global(.intro-playing .nav-panel), :global(.intro-playing .brand span) { opacity: 0; }
+  :global(html.intro-done main), :global(html.intro-done .nav-panel), :global(html.intro-done .brand span) { opacity: 1; transition: opacity .8s ease; }
+  /* The flying mark lands exactly on the nav logo, so the nav logo can appear underneath it */
+  :global(html.intro-done .brand-mark) { opacity: 1; }
+  /* Hero entrance animations wait until the intro hands over */
+  :global(html.intro-playing:not(.intro-done) .hero *) { animation-play-state: paused !important; }
+</style>
+
+<script>
+  const root = document.documentElement;
+  const intro = document.getElementById('intro');
+  if (intro && root.classList.contains('intro-playing')) {
+    try { sessionStorage.setItem('cb-intro', '1'); } catch {}
+    const mark = intro.querySelector<HTMLElement>('.mark')!;
+    const logo = intro.querySelector<SVGElement>('.intro-logo')!;
+    let done = false;
+
+    const finish = () => {
+      if (done) return;
+      done = true;
+      clearTimeout(timer);
+      // Make sure the drawing is complete before it flies (matters when skipped early).
+      logo.querySelectorAll<SVGElement>('path').forEach((p) => { p.style.animation = 'none'; p.style.strokeDashoffset = '0'; });
+      const target = document.querySelector<SVGElement>('.brand-mark');
+      intro.classList.add('flying');
+      if (target) {
+        const a = logo.getBoundingClientRect();
+        const b = target.getBoundingClientRect();
+        const dx = b.left + b.width / 2 - (a.left + a.width / 2);
+        const dy = b.top + b.height / 2 - (a.top + a.height / 2);
+        mark.style.transformOrigin = `${a.left + a.width / 2 - mark.getBoundingClientRect().left}px ${a.top + a.height / 2 - mark.getBoundingClientRect().top}px`;
+        mark.style.transform = `translate(${dx}px, ${dy}px) scale(${b.width / a.width})`;
+      }
+      setTimeout(() => {
+        root.classList.add('intro-done');
+        intro.classList.add('out');
+      }, 750);
+      setTimeout(() => {
+        root.classList.remove('intro-playing');
+        intro.remove();
+      }, 1500);
+    };
+
+    const timer = setTimeout(finish, 3000);
+    intro.addEventListener('click', finish);
+    window.addEventListener('keydown', finish, { once: true });
+  }
+</script>

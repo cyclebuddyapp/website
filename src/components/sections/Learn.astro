@@ -1,0 +1,51 @@
+---
+import { t, type Lang } from '../../i18n/utils';
+interface Props { lang: Lang }
+const s = t(Astro.props.lang).learn;
+---
+<section class="learn" id="learn">
+  <div class="wrap grid">
+    <div>
+      <p class="eyebrow reveal">{s.eyebrow}</p>
+      <h2 class="reveal" style="--i:1">{s.h}</h2>
+      <p class="lead reveal" style="--i:2">{s.p}</p>
+      <!-- five short episodes, then a quiz -->
+      <div class="episodes reveal" style="--i:3" aria-hidden="true">
+        {[1, 2, 3, 4, 5].map((n) => <span class="ep" style={`--n:${n}`}>{n}</span>)}
+        <span class="quiz">Quiz</span>
+      </div>
+      <p class="free reveal" style="--i:4"><span aria-hidden="true">♡</span> {s.free}</p>
+    </div>
+    <ol class="qualities" role="list">
+      {s.items.map((q, i) => (
+        <li class="q reveal" style={`--i:${i + 1}`}>
+          <span class="badge" aria-hidden="true">{i + 1}</span>
+          <div><h3>{q.h}</h3><p>{q.p}</p></div>
+        </li>
+      ))}
+    </ol>
+  </div>
+</section>
+
+<style>
+  .learn { background: var(--white); }
+  .learn::before { content: ''; position: absolute; inset: 0; background: radial-gradient(circle at 90% 10%, rgba(45,169,160,.08), transparent 40%), radial-gradient(circle at 0% 100%, rgba(204,52,102,.07), transparent 40%); pointer-events: none; }
+  .grid { position: relative; display: grid; grid-template-columns: .95fr 1.05fr; gap: clamp(40px, 6vw, 80px); align-items: center; }
+  .lead { margin-top: 18px; }
+  .episodes { display: flex; align-items: center; gap: 8px; margin-top: 30px; flex-wrap: wrap; }
+  .ep { width: 38px; height: 38px; border-radius: 50%; display: grid; place-items: center; font-size: 13px; font-weight: 700; color: var(--burgundy); background: var(--ivory); border: 1.5px solid var(--beige); }
+  .quiz { padding: 8px 14px; border-radius: 999px; font-size: 13px; font-weight: 700; color: #fff; background: linear-gradient(135deg, var(--teal-ink), var(--teal)); }
+  :global(.js) .episodes.in .ep { animation: ep-fill .5s var(--ease) both; animation-delay: calc(.4s + var(--n) * .22s); }
+  :global(.js) .episodes.in .quiz { animation: ep-pop .6s var(--ease) both 1.75s; }
+  @keyframes ep-fill { to { background: var(--burgundy); color: #fff; border-color: transparent; transform: scale(1.06); } }
+  @keyframes ep-pop { from { transform: scale(.4); opacity: 0; } }
+  .free { margin-top: 22px; font-size: 15px; color: var(--burgundy); font-weight: 600; }
+  .free span { color: var(--pink); }
+  .qualities { display: grid; gap: 16px; list-style: none; }
+  .q { display: flex; gap: 20px; align-items: flex-start; background: var(--ivory-2); border: 1px solid var(--line); border-radius: 20px; padding: 24px 26px; transition: transform .4s var(--ease), box-shadow .4s var(--ease), border-color .4s; }
+  .q:hover { transform: translateX(8px); box-shadow: var(--shadow); border-color: #EBC6D2; }
+  .badge { flex: none; width: 48px; height: 48px; border-radius: 15px; display: grid; place-items: center; font-family: var(--serif); font-weight: 700; font-size: 24px; color: #fff; background: var(--grad); }
+  .q h3 { font-size: 26px; }
+  .q p { color: var(--muted); font-size: 15px; margin-top: 4px; }
+  @media (max-width: 900px) { .grid { grid-template-columns: 1fr; } }
+</style>

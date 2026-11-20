@@ -1,0 +1,23 @@
+---
+// Inline SVG logo. `id` must be unique per page (gradient and mask ids are derived from it).
+import { LOGO_VIEWBOX, LOGO_A, LOGO_B, LOGO_STROKE } from '../data/logo';
+interface Props { id: string; class?: string; title?: string; draw?: boolean }
+const { id, class: cls, title, draw = false } = Astro.props;
+const g = `${id}-g`, m = `${id}-m`;
+---
+<svg class:list={['logo', cls, { draw }]} viewBox={LOGO_VIEWBOX} role={title ? 'img' : undefined} aria-hidden={title ? undefined : 'true'} aria-label={title} focusable="false">
+  <defs>
+    <linearGradient id={g} gradientUnits="userSpaceOnUse" x1="80" y1="80" x2="940" y2="940">
+      <stop offset="0" stop-color="#CC3466" />
+      <stop offset="1" stop-color="#800020" />
+    </linearGradient>
+    <mask id={m} maskUnits="userSpaceOnUse" x="-50" y="-50" width="1124" height="1124">
+      <rect x="-50" y="-50" width="1124" height="1124" fill="#fff" />
+      <path class="mask-a" d={LOGO_A} fill="none" stroke="#000" stroke-width={LOGO_STROKE + 28} pathLength="1" />
+    </mask>
+  </defs>
+  <g fill="none" stroke={`url(#${g})`} stroke-width={LOGO_STROKE} stroke-linecap="round" stroke-linejoin="round">
+    <path class="b" d={LOGO_B} mask={`url(#${m})`} pathLength="1" />
+    <path class="a" d={LOGO_A} pathLength="1" />
+  </g>
+</svg>

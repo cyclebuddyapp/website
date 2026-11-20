@@ -1,0 +1,37 @@
+---
+import Icon from '../Icon.astro';
+import { t, type Lang } from '../../i18n/utils';
+interface Props { lang: Lang }
+const s = t(Astro.props.lang).mission;
+const icons = ['heart', 'wifiOff', 'book'] as const;
+---
+<section class="mission" id="mission">
+  <div class="wrap center">
+    <p class="eyebrow reveal">{s.eyebrow}</p>
+    <h2 class="reveal" style="--i:1">{s.h}</h2>
+    <ul class="grid" role="list">
+      {s.items.map((m, i) => (
+        <li class="card reveal" style={`--i:${i}`}>
+          <span class="mi" aria-hidden="true"><Icon name={icons[i]} size={22} /></span>
+          <h3>{m.h}</h3>
+          <p>{m.p}</p>
+          {i === 2 && (
+            <p class="more"><a class="text-link" href="mailto:hello@cyclebuddy.ca?subject=Schools">{s.teachers}<Icon name="arrow" size={16} class="arrow" /></a></p>
+          )}
+        </li>
+      ))}
+    </ul>
+  </div>
+</section>
+
+<style>
+  .mission h2 { max-width: 860px; margin: 0 auto; }
+  .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; margin-top: 56px; text-align: left; list-style: none; }
+  .mi { width: 50px; height: 50px; border-radius: 16px; display: grid; place-items: center; margin-bottom: 18px; background: var(--pink-soft); color: var(--pink-ink); transition: transform .5s var(--ease); }
+  .card:nth-child(2) .mi { background: var(--teal-soft); color: var(--teal-ink); }
+  .card:hover .mi { transform: translateY(-4px) rotate(-6deg); }
+  .card h3 { margin-bottom: 10px; }
+  .card p { color: var(--muted); font-size: 15.5px; }
+  .more { margin-top: 14px; }
+  @media (max-width: 900px) { .grid { grid-template-columns: 1fr; } }
+</style>
