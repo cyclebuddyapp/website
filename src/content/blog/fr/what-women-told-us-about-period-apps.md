@@ -12,6 +12,6 @@ draft: true
 > **Brouillon.** Ceci est un texte provisoire. L’article complet arrive bientôt.
 
 Ce que cet article abordera :
-- Comment nous avons mené nos entrevues avec des femmes de 18 à 40 ans
+- Comment nous avons recueilli les réponses de femmes de 18 à 40 ans
 - Les thèmes qui sont revenus encore et encore
-- Comment ces conversations ont façonné le format éducatif et les paramètres de confidentialité par défaut
+- Comment ces réponses ont façonné le format éducatif et les paramètres de confidentialité par défaut

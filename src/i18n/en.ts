@@ -137,7 +137,7 @@ const en = {
     h: 'Research with women, not on them.',
     p: "Women's health is understudied. CycleBuddy lets the women who want to help move science forward, on their own terms, and shares back what we learn.",
     cards: [
-      { n: '17+', h: 'Listening first', p: 'Recorded conversations with women aged 18 to 40 shaped every feature, from the education format to the privacy defaults. More interviews are coming in Peru.' },
+      { n: '17+', h: 'Listening first', p: 'Women aged 18 to 40 answered our questions about periods, apps and privacy. Their answers shaped every feature, from the education format to the privacy defaults. More voices from Peru are coming soon.' },
       { n: '1×1', h: 'Consent per study', p: "Each study asks separately. You see the lab, the question and what's shared before you say yes. Anonymized before it leaves your phone." },
       { n: '↺', h: 'Findings go back to you', p: "When a study you joined publishes, you'll hear about it in plain language, and the education series is updated to match." },
     ],
@@ -210,7 +210,7 @@ const en = {
   pages: {
     research: {
       title: 'Research · CycleBuddy',
-      description: 'How CycleBuddy research works: consent for every study, what we heard in our interviews, and how universities and companies can partner with us.',
+      description: 'How CycleBuddy research works: consent for every study, what women told us, and how universities and companies can partner with us.',
       partnerH: 'Partner with us',
       partnerP: "Universities, research labs and companies working on women's health: tell us about your question and we'll get back to you.",
     },

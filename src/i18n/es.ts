@@ -140,7 +140,7 @@ const es: Dict = {
     h: 'Investigación con mujeres, no sobre ellas.',
     p: 'La salud de la mujer sigue poco investigada. CycleBuddy permite que las mujeres que quieran ayuden a que la ciencia avance, en sus propios términos, y les compartimos lo que aprendemos.',
     cards: [
-      { n: '17+', h: 'Primero, escuchar', p: 'Conversaciones grabadas con mujeres de 18 a 40 años dieron forma a cada función, desde el formato educativo hasta la privacidad predeterminada. Pronto haremos más entrevistas en Perú.' },
+      { n: '17+', h: 'Primero, escuchar', p: 'Mujeres de 18 a 40 años respondieron nuestras preguntas sobre la menstruación, las apps y la privacidad. Sus respuestas dieron forma a cada función, desde el formato educativo hasta la privacidad predeterminada. Pronto sumaremos más voces desde Perú.' },
       { n: '1×1', h: 'Consentimiento por estudio', p: 'Cada estudio te pide permiso por separado. Antes de aceptar, ves el laboratorio, la pregunta y qué datos se comparten. Todo se anonimiza antes de salir de tu teléfono.' },
       { n: '↺', h: 'Los resultados vuelven a ti', p: 'Cuando se publique un estudio en el que participaste, te lo contaremos en lenguaje sencillo, y la serie educativa se actualizará con lo aprendido.' },
     ],
@@ -213,7 +213,7 @@ const es: Dict = {
   pages: {
     research: {
       title: 'Investigación · CycleBuddy',
-      description: 'Cómo funciona la investigación en CycleBuddy: consentimiento para cada estudio, lo que escuchamos en nuestras entrevistas y cómo universidades y empresas pueden colaborar con nosotros.',
+      description: 'Cómo funciona la investigación en CycleBuddy: consentimiento para cada estudio, lo que nos contaron las mujeres y cómo universidades y empresas pueden colaborar con nosotros.',
       partnerH: 'Colaboremos',
       partnerP: 'Universidades, laboratorios y empresas que trabajan en salud de la mujer: cuéntennos su pregunta de investigación y les responderemos.',
     },

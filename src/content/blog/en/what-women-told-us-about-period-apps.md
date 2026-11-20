@@ -12,6 +12,6 @@ draft: true
 > **Draft.** This is a placeholder. The full post is coming soon.
 
 What this post will cover:
-- How we ran our interviews with women aged 18 to 40
+- How we gathered answers from women aged 18 to 40
 - The themes that came up again and again
-- How those conversations shaped the education format and the privacy defaults
+- How those answers shaped the education format and the privacy defaults

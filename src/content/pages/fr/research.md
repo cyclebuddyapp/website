@@ -16,9 +16,9 @@ Partager des données avec la recherche est toujours ton choix, et ce n’est ja
 5. **Tu peux arrêter quand tu veux.** Quitter une étude met fin à tout partage. Les données déjà partagées avec un laboratoire ne peuvent pas être récupérées, et nous te le dirons toujours clairement avant que tu participes.
 6. **Les résultats te reviennent.** Quand une étude à laquelle tu as participé est publiée, nous te l’expliquons en langage clair, et la série éducative est mise à jour en conséquence.
 
-## Ce que nous avons entendu en entrevue
+## Ce que les femmes nous ont dit
 
-Nous avons commencé par écouter. Au moins 17 conversations enregistrées avec des femmes de 18 à 40 ans ont façonné chaque fonctionnalité, du format éducatif aux réglages de confidentialité par défaut. D’autres entrevues auront lieu bientôt au Pérou.
+Nous avons commencé par écouter. Au moins 17 femmes de 18 à 40 ans ont répondu à notre questionnaire sur les règles, les applis de suivi et la vie privée. Leurs réponses ont façonné chaque fonctionnalité, du format éducatif aux réglages de confidentialité par défaut. D’autres voix du Pérou s’ajouteront bientôt.
 
 Quelques thèmes qui sont ressortis :
 
@@ -26,7 +26,7 @@ Quelques thèmes qui sont ressortis :
 - On sait rarement ce que les applis de règles font des données qu’on y note.
 - Les femmes veulent une éducation courte et honnête, et un vrai contrôle sur leurs propres données.
 
-> Les résultats complets de nos entrevues seront publiés bientôt dans un article du blogue.
+> Les résultats complets seront publiés bientôt dans un article du blogue.
 
 ## Avec qui nous voulons travailler
 

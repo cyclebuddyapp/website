@@ -12,6 +12,6 @@ draft: true
 > **Borrador.** Este es un texto provisional. La entrada completa llegará pronto.
 
 De qué tratará esta entrada:
-- Cómo hicimos las entrevistas con mujeres de 18 a 40 años
+- Cómo recogimos las respuestas de mujeres de 18 a 40 años
 - Los temas que se repitieron una y otra vez
-- Cómo esas conversaciones dieron forma al formato educativo y a la privacidad predeterminada
+- Cómo esas respuestas dieron forma al formato educativo y a la privacidad predeterminada

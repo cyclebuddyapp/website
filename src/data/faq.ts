@@ -10,7 +10,7 @@ export const FAQ: Record<Lang, FaqGroup[]> = {
   en: [
     {
       id: 'basics', title: 'The basics', items: [
-        { id: 'free', q: 'Is CycleBuddy free?', a: 'Yes, you can use CycleBuddy for free, and the menstrual health education is always free. CycleBuddy Pro costs $4.99 per month and adds personalized guidance: Nourish, Move, Intimacy and Partner.' }, // CONFIRM
+        { id: 'free', q: 'Is the education free?', a: 'Yes. The menstrual health education in CycleBuddy is always free, for everyone, so knowing your own body never depends on what you can pay.' },
         { id: 'launch', q: 'When does CycleBuddy launch?', a: 'CycleBuddy launches this winter, in December 2026 or January 2027. It isn’t in the app stores yet. Join the waitlist on our homepage and we’ll let you know when it’s ready.' },
         { id: 'phones', q: 'Which phones does it work on?', a: 'iPhone (iOS) and Android, including affordable Android phones.' },
         { id: 'spanish', q: 'Is CycleBuddy available in Spanish?', a: 'Yes. CycleBuddy is available in English and Spanish, and French is coming soon. This website is also available in French.' },
@@ -44,7 +44,7 @@ export const FAQ: Record<Lang, FaqGroup[]> = {
   es: [
     {
       id: 'basics', title: 'Lo básico', items: [
-        { id: 'free', q: '¿CycleBuddy es gratis?', a: 'Sí, puedes usar CycleBuddy gratis, y la educación sobre salud menstrual es siempre gratuita. CycleBuddy Pro cuesta 4,99 $ al mes y suma recomendaciones personalizadas: Nutre, Muévete, Intimidad y Pareja.' },
+        { id: 'free', q: '¿La educación es gratuita?', a: 'Sí. La educación sobre salud menstrual de CycleBuddy es siempre gratuita, para todas, para que conocer tu cuerpo nunca dependa de cuánto puedas pagar.' },
         { id: 'launch', q: '¿Cuándo sale CycleBuddy?', a: 'CycleBuddy llega este invierno, en diciembre de 2026 o enero de 2027. Todavía no está en las tiendas de apps. Únete a la lista de espera en nuestra página de inicio y te avisaremos cuando esté lista.' },
         { id: 'phones', q: '¿En qué teléfonos funciona?', a: 'En iPhone (iOS) y Android, incluidos teléfonos Android económicos.' },
         { id: 'spanish', q: '¿CycleBuddy está en español?', a: 'Sí. CycleBuddy está en español e inglés, y pronto en francés. Este sitio web también está en francés.' },
@@ -78,7 +78,7 @@ export const FAQ: Record<Lang, FaqGroup[]> = {
   fr: [
     {
       id: 'basics', title: 'L’essentiel', items: [
-        { id: 'free', q: 'CycleBuddy est-elle gratuite?', a: 'Oui, tu peux utiliser CycleBuddy gratuitement, et l’éducation sur la santé menstruelle est toujours gratuite. CycleBuddy Pro coûte 4,99 $ par mois et ajoute des conseils personnalisés : Nourrir, Bouger, Intimité et Partenaire.' },
+        { id: 'free', q: 'L’éducation est-elle gratuite?', a: 'Oui. L’éducation sur la santé menstruelle de CycleBuddy est toujours gratuite, pour toutes, pour que connaître ton corps ne dépende jamais de tes moyens.' },
         { id: 'launch', q: 'Quand CycleBuddy sera-t-elle lancée?', a: 'CycleBuddy arrive cet hiver, en décembre 2026 ou en janvier 2027. Elle n’est pas encore offerte dans les magasins d’applis. Inscris-toi à la liste d’attente sur notre page d’accueil : nous te préviendrons dès qu’elle sera prête.' },
         { id: 'phones', q: 'Sur quels téléphones fonctionne-t-elle?', a: 'Sur iPhone (iOS) et Android, y compris les téléphones Android abordables.' },
         { id: 'spanish', q: 'CycleBuddy est-elle offerte en espagnol? Et en français?', a: 'CycleBuddy est offerte en anglais et en espagnol, et le français arrive bientôt. Ce site Web, lui, est déjà offert en français.' },

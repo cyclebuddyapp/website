@@ -15,7 +15,7 @@ const icons = ['phone', 'cloud', 'flask', 'code'] as const;
       {s.cards.map((c, i) => (
         <li class:list={['pcard reveal', { def: i === 0 }]} style={`--i:${i}`}>
           <div class="head">
-            <span class="pi" aria-hidden="true"><Icon name={icons[i]} size={20} /></span>
+            <span class="pi gloss" aria-hidden="true"><Icon name={icons[i]} size={20} /></span>
             <span class="k">{c.k}</span>
           </div>
           <h3>{c.h}</h3>

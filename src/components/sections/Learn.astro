@@ -19,7 +19,7 @@ const s = t(Astro.props.lang).learn;
     <ol class="qualities" role="list">
       {s.items.map((q, i) => (
         <li class="q reveal" style={`--i:${i + 1}`}>
-          <span class="badge" aria-hidden="true">{i + 1}</span>
+          <span class="badge gloss" aria-hidden="true">{i + 1}</span>
           <div><h3>{q.h}</h3><p>{q.p}</p></div>
         </li>
       ))}

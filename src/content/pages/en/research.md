@@ -16,9 +16,9 @@ Sharing data with research is always your choice, and it is never on by default.
 5. **You can stop anytime.** Leaving a study stops any further sharing. Data already shared with a lab can't be recalled, and we will always tell you that plainly before you join.
 6. **Findings come back to you.** When a study you joined publishes, you'll hear about it in plain language, and the education series is updated to match.
 
-## What we heard in our interviews
+## What women told us
 
-We started by listening. 17+ recorded conversations with women aged 18 to 40 shaped every feature, from the education format to the privacy defaults. More interviews are coming in Peru.
+We started by listening. 17+ women aged 18 to 40 answered our questionnaire about periods, period apps and privacy. Their answers shaped every feature, from the education format to the privacy defaults. More voices from Peru are coming soon.
 
 Some of the themes that came up:
 
@@ -26,7 +26,7 @@ Some of the themes that came up:
 - It is often unclear what period apps do with the data people log.
 - People want short, honest education, and real control over their own data.
 
-> Our full interview findings are coming in a dedicated blog post.
+> The full findings are coming in a dedicated blog post.
 
 ## Who we want to work with
 

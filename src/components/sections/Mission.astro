@@ -12,7 +12,7 @@ const icons = ['heart', 'globe', 'book'] as const;
     <ul class="grid" role="list">
       {s.items.map((m, i) => (
         <li class="card reveal" style={`--i:${i}`}>
-          <span class="mi" aria-hidden="true"><Icon name={icons[i]} size={22} /></span>
+          <span class="mi gloss" aria-hidden="true"><Icon name={icons[i]} size={22} /></span>
           <h3>{m.h}</h3>
           <p>{m.p}</p>
           {i === 2 && (

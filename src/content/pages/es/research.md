@@ -16,9 +16,9 @@ Compartir datos con la investigación siempre es decisión tuya, y nunca viene a
 5. **Puedes dejarlo cuando quieras.** Al salir de un estudio, se deja de compartir cualquier dato. Lo que ya se compartió con un laboratorio no se puede recuperar, y siempre te lo diremos con claridad antes de que participes.
 6. **Los resultados vuelven a ti.** Cuando se publique un estudio en el que participaste, te lo contaremos en lenguaje sencillo, y la serie educativa se actualizará con lo aprendido.
 
-## Lo que escuchamos en las entrevistas
+## Lo que nos contaron las mujeres
 
-Empezamos escuchando. Al menos 17 conversaciones grabadas con mujeres de 18 a 40 años dieron forma a cada función, desde el formato educativo hasta la privacidad predeterminada. Pronto haremos más entrevistas en Perú.
+Empezamos escuchando. Al menos 17 mujeres de 18 a 40 años respondieron nuestro cuestionario sobre la menstruación, las apps menstruales y la privacidad. Sus respuestas dieron forma a cada función, desde el formato educativo hasta la privacidad predeterminada. Pronto sumaremos más voces desde Perú.
 
 Algunos de los temas que surgieron:
 
@@ -26,7 +26,7 @@ Algunos de los temas que surgieron:
 - Muchas veces no queda claro qué hacen las apps menstruales con los datos que registras.
 - Quieren educación corta y honesta, y control real sobre sus propios datos.
 
-> Pronto publicaremos los resultados completos de las entrevistas en una entrada del blog.
+> Pronto publicaremos los resultados completos en una entrada del blog.
 
 ## Con quién queremos trabajar
 

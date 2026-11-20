@@ -141,7 +141,7 @@ const fr: Dict = {
     h: 'La recherche avec les femmes, pas sur elles.',
     p: 'La santé des femmes reste trop peu étudiée. CycleBuddy permet à celles qui le souhaitent de faire avancer la science, selon leurs propres conditions, et leur partage ce que nous apprenons.',
     cards: [
-      { n: '17+', h: 'D’abord, écouter', p: 'Des conversations enregistrées avec des femmes de 18 à 40 ans ont façonné chaque fonctionnalité, du format éducatif aux réglages de confidentialité par défaut. D’autres entrevues auront lieu bientôt au Pérou.' },
+      { n: '17+', h: 'D’abord, écouter', p: 'Des femmes de 18 à 40 ans ont répondu à nos questions sur les règles, les applis et la vie privée. Leurs réponses ont façonné chaque fonctionnalité, du format éducatif aux réglages de confidentialité par défaut. D’autres voix du Pérou s’ajouteront bientôt.' },
       { n: '1×1', h: 'Un consentement par étude', p: 'Chaque étude te demande ton accord séparément. Avant de dire oui, tu vois le laboratoire, la question et les données partagées. Tout est anonymisé avant de quitter ton téléphone.' },
       { n: '↺', h: 'Les résultats te reviennent', p: 'Quand une étude à laquelle tu as participé est publiée, nous te l’expliquons en langage clair, et la série éducative est mise à jour en conséquence.' },
     ],
@@ -214,7 +214,7 @@ const fr: Dict = {
   pages: {
     research: {
       title: 'Recherche · CycleBuddy',
-      description: 'Comment fonctionne la recherche chez CycleBuddy : un consentement pour chaque étude, ce que nous avons entendu en entrevue, et comment les universités et les entreprises peuvent devenir partenaires.',
+      description: 'Comment fonctionne la recherche chez CycleBuddy : un consentement pour chaque étude, ce que les femmes nous ont dit, et comment les universités et les entreprises peuvent devenir partenaires.',
       partnerH: 'Devenir partenaire',
       partnerP: 'Universités, laboratoires et entreprises qui travaillent en santé des femmes : parlez-nous de votre question de recherche, et nous vous répondrons.',
     },

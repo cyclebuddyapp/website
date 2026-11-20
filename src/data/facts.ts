@@ -12,8 +12,6 @@ export const PRODUCT = {
   platforms: ['iOS', 'Android'],
   appLanguages: ['en', 'es'], // French: coming soon
   websiteLanguages: ['en', 'es', 'fr'],
-  proPrice: '4.99', // CONFIRM currency (USD or CAD?)
-  proCurrency: 'USD',
   launch: 'Winter 2026–27 (December 2026 or January 2027)',
   status: 'coming-soon' as 'coming-soon' | 'live',
   email: 'hello@cyclebuddy.ca',
@@ -29,7 +27,7 @@ export const FACTS: Record<Lang, Fact[]> = {
     { id: 'who', topic: 'Who it’s for', answer: 'Anyone who wants to understand their menstrual cycle without giving up their privacy. A free teen version and classroom materials are planned.' },
     { id: 'platforms', topic: 'Platforms', answer: 'iOS and Android, including affordable Android phones.' },
     { id: 'languages', topic: 'Languages', answer: 'English and Spanish. French is coming soon. This website is available in English, Spanish and French.' },
-    { id: 'price', topic: 'Price', answer: 'Free to use, and the menstrual health education is always free. CycleBuddy Pro costs $4.99 per month.' }, // CONFIRM what the free tier includes
+    { id: 'education', topic: 'Education', answer: 'The menstrual health education is always free, for everyone.' },
     { id: 'data', topic: 'Where your data is stored', answer: 'On your phone, encrypted. No account is needed to track. You can turn on an optional encrypted cloud backup that only you can unlock.' },
     { id: 'ai', topic: 'AI', answer: 'A small model built only for menstrual health. It runs on your phone, even offline. No big-tech AI is involved.' },
     { id: 'selling', topic: 'Selling data', answer: 'CycleBuddy does not sell your data.' },
@@ -46,7 +44,7 @@ export const FACTS: Record<Lang, Fact[]> = {
     { id: 'who', topic: 'Para quién es', answer: 'Para cualquier persona que quiera entender su ciclo menstrual sin renunciar a su privacidad. Hay planes para una versión gratuita para adolescentes y materiales para el aula.' },
     { id: 'platforms', topic: 'Plataformas', answer: 'iOS y Android, incluidos teléfonos Android económicos.' },
     { id: 'languages', topic: 'Idiomas', answer: 'Español e inglés. Pronto en francés. Este sitio web está en español, inglés y francés.' },
-    { id: 'price', topic: 'Precio', answer: 'Se puede usar gratis, y la educación sobre salud menstrual es siempre gratuita. CycleBuddy Pro cuesta 4,99 $ al mes.' },
+    { id: 'education', topic: 'Educación', answer: 'La educación sobre salud menstrual es siempre gratuita, para todas.' },
     { id: 'data', topic: 'Dónde se guardan tus datos', answer: 'En tu teléfono, cifrados. No necesitas una cuenta para registrar tu ciclo. Puedes activar un respaldo cifrado en la nube que solo tú puedes abrir.' },
     { id: 'ai', topic: 'IA', answer: 'Un modelo pequeño hecho solo para la salud menstrual. Funciona en tu teléfono, incluso sin internet. No interviene ninguna IA de las grandes tecnológicas.' },
     { id: 'selling', topic: 'Venta de datos', answer: 'CycleBuddy no vende tus datos.' },
@@ -63,7 +61,7 @@ export const FACTS: Record<Lang, Fact[]> = {
     { id: 'who', topic: 'Pour qui', answer: 'Pour toute personne qui veut comprendre son cycle menstruel sans renoncer à sa vie privée. Une version gratuite pour les ados et du matériel pédagogique sont prévus.' },
     { id: 'platforms', topic: 'Plateformes', answer: 'iOS et Android, y compris les téléphones Android abordables.' },
     { id: 'languages', topic: 'Langues', answer: 'Anglais et espagnol. Le français arrive bientôt. Ce site est offert en anglais, en espagnol et en français.' },
-    { id: 'price', topic: 'Prix', answer: 'Utilisation gratuite, et l’éducation sur la santé menstruelle est toujours gratuite. CycleBuddy Pro coûte 4,99 $ par mois.' },
+    { id: 'education', topic: 'Éducation', answer: 'L’éducation sur la santé menstruelle est toujours gratuite, pour toutes.' },
     { id: 'data', topic: 'Où sont stockées tes données', answer: 'Sur ton téléphone, chiffrées. Aucun compte n’est nécessaire pour suivre ton cycle. Tu peux activer une sauvegarde chiffrée dans le nuage que toi seule peux déverrouiller.' },
     { id: 'ai', topic: 'IA', answer: 'Un petit modèle conçu uniquement pour la santé menstruelle. Il fonctionne sur ton téléphone, même sans connexion. Aucune IA des géants du numérique n’intervient.' },
     { id: 'selling', topic: 'Vente de données', answer: 'CycleBuddy ne vend pas tes données.' },

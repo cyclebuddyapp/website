@@ -15,7 +15,7 @@ const icons = ['calendar', 'book', 'sparkle'] as const;
       {s.items.map((it, i) => (
         <li class="card step reveal" style={`--i:${i + 1}`}>
           <span class="num" aria-hidden="true">0{i + 1}</span>
-          <span class="badge" aria-hidden="true"><Icon name={icons[i]} size={24} /></span>
+          <span class="badge gloss" aria-hidden="true"><Icon name={icons[i]} size={24} /></span>
           <h3>{it.h}</h3>
           <p>{it.p}</p>
         </li>
