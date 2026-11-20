@@ -1,0 +1,75 @@
+---
+// /faq: real questions, grouped. Each answer is in the static HTML (inside <details>), so it is
+// readable without JS and by agents. Linking to /faq/#<question-id> opens that question.
+import Base from '../../layouts/Base.astro';
+import PageHeader from '../PageHeader.astro';
+import Icon from '../Icon.astro';
+import { FAQ } from '../../data/faq';
+import { t, type Lang } from '../../i18n/utils';
+interface Props { lang: Lang }
+const { lang } = Astro.props;
+const s = t(lang).pages.faq;
+const groups = FAQ[lang];
+---
+<Base lang={lang} title={s.title} description={s.description} path="/faq/">
+  <PageHeader eyebrow={s.eyebrow} h1={s.h} lead={s.lead}>
+    <nav class="jump rise" style="--d:3" aria-label={s.h}>
+      {groups.map((g) => <a href={`#${g.id}`}>{g.title}</a>)}
+    </nav>
+  </PageHeader>
+  <div class="body">
+    <div class="wrap">
+      {groups.map((g) => (
+        <section class="group" id={g.id} aria-labelledby={`${g.id}-h`}>
+          <h2 id={`${g.id}-h`} class="reveal">{g.title}</h2>
+          <div class="list">
+            {g.items.map((it, i) => (
+              <details class="qa reveal" id={it.id} style={`--i:${i}`}>
+                <summary><h3>{it.q}</h3><span class="plus" aria-hidden="true"><Icon name="arrow" size={18} /></span></summary>
+                <div class="a"><p>{it.a}</p></div>
+              </details>
+            ))}
+          </div>
+        </section>
+      ))}
+    </div>
+  </div>
+</Base>
+
+<style>
+  .jump { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 26px; }
+  .jump a { text-decoration: none; font-size: 14px; font-weight: 600; color: var(--burgundy); background: rgba(255,255,255,.8); border: 1px solid var(--line); border-radius: 999px; padding: 8px 16px; transition: border-color .2s, transform .2s; }
+  .jump a:hover { border-color: var(--pink); transform: translateY(-2px); }
+  .rise { animation: rise .9s var(--ease) both; animation-delay: calc(.05s + var(--d) * .1s); }
+  @keyframes rise { from { opacity: 0; transform: translateY(18px); } }
+
+  .body { padding: clamp(40px, 6vw, 80px) 0 clamp(70px, 9vw, 110px); }
+  .group { padding: 0; max-width: 860px; }
+  .group + .group { margin-top: clamp(44px, 6vw, 70px); }
+  .group h2 { font-size: clamp(30px, 3.6vw, 40px); margin-bottom: 18px; }
+  .list { display: grid; gap: 12px; }
+  .qa { background: var(--white); border: 1px solid #F1E4DA; border-radius: 18px; box-shadow: 0 10px 30px -24px rgba(128,0,32,.4); transition: box-shadow .3s, border-color .3s; }
+  .qa[open] { border-color: #EBC6D2; box-shadow: var(--shadow); }
+  .qa:target { border-color: var(--teal); }
+  summary { list-style: none; cursor: pointer; display: flex; justify-content: space-between; align-items: center; gap: 16px; padding: 20px 22px; }
+  summary::-webkit-details-marker { display: none; }
+  summary h3 { font-family: var(--sans); font-size: 17px; font-weight: 600; color: var(--ink); line-height: 1.4; }
+  summary:hover h3 { color: var(--burgundy); }
+  .plus { flex: none; width: 34px; height: 34px; border-radius: 50%; display: grid; place-items: center; background: var(--pink-soft); color: var(--pink-ink); transform: rotate(90deg); transition: transform .35s var(--ease), background-color .3s; }
+  .qa[open] .plus { transform: rotate(-90deg); background: var(--teal-soft); color: var(--teal-ink); }
+  .a { padding: 0 22px 22px; color: var(--muted); font-size: 16.5px; max-width: 720px; }
+  .qa[open] .a { animation: open .45s var(--ease); }
+  @keyframes open { from { opacity: 0; transform: translateY(-6px); } }
+</style>
+
+<script>
+  // Open the question in the URL hash (e.g. /faq/#access), or the first one in a group (e.g. /faq/#ai).
+  const openFromHash = () => {
+    const el = location.hash && document.getElementById(decodeURIComponent(location.hash.slice(1)));
+    if (!el) return;
+    const d = el instanceof HTMLDetailsElement ? el : el.querySelector('details');
+    if (d) d.open = true;
+  };
+  openFromHash();
+  window.addEventListener('hashchange', openFromHash);
+</script>

@@ -3,7 +3,7 @@ import Icon from '../Icon.astro';
 import { t, type Lang } from '../../i18n/utils';
 interface Props { lang: Lang }
 const s = t(Astro.props.lang).mission;
-const icons = ['heart', 'wifiOff', 'book'] as const;
+const icons = ['heart', 'globe', 'book'] as const;
 ---
 <section class="mission" id="mission">
   <div class="wrap center">

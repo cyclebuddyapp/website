@@ -12,7 +12,10 @@ const s = t(lang).research;
         <p class="eyebrow reveal">{s.eyebrow}</p>
         <h2 class="reveal" style="--i:1">{s.h}</h2>
       </div>
-      <p class="lead reveal" style="--i:2">{s.p}</p>
+      <div class="reveal" style="--i:2">
+        <p class="lead">{s.p}</p>
+        <p class="more"><a class="text-link" href={localize(lang, '/research/')}>{s.more}<Icon name="arrow" size={16} class="arrow" /></a></p>
+      </div>
     </div>
     <ul class="rgrid" role="list">
       {s.cards.map((c, i) => (
@@ -42,6 +45,7 @@ const s = t(lang).research;
   .partner { margin-top: 26px; display: flex; justify-content: space-between; align-items: center; gap: 20px; flex-wrap: wrap; border-radius: 20px; padding: 24px 28px; font-size: 16px; background: linear-gradient(120deg, var(--pink-soft), #FBE9EE 50%, var(--teal-soft)); background-size: 200% 100%; animation: shimmer 12s ease-in-out infinite alternate; }
   @keyframes shimmer { to { background-position: 100% 0; } }
   .partner b { color: var(--burgundy); }
+  .more { margin-top: 14px; }
   @media (max-width: 900px) { .rhead, .rgrid { grid-template-columns: 1fr; } .rhead { gap: 18px; } }
 </style>
 

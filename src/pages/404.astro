@@ -1,0 +1,44 @@
+---
+// GitHub Pages serves one 404 page for every language, so it greets visitors in all three.
+import Base from '../layouts/Base.astro';
+import Logo from '../components/Logo.astro';
+import { langs, languages, localize, t } from '../i18n/utils';
+const en = t('en').pages.notFound;
+---
+<Base lang="en" title={en.title} description={en.p} path="/404/" translated={false} noindex>
+  <section class="nf">
+    <div class="wrap">
+      <Logo id="nf-logo" class="nf-logo" draw />
+      <p class="code" aria-hidden="true">404</p>
+      <h1>{en.h}</h1>
+      <p class="lead">{en.p}</p>
+      <ul class="homes" role="list">
+        {langs.map((l) => {
+          const s = t(l).pages.notFound;
+          return (
+            <li lang={languages[l].hreflang}>
+              <a class:list={['btn', l === 'en' ? 'btn-primary' : 'btn-ghost']} href={localize(l, '/')}>{s.home} · {languages[l].short}</a>
+            </li>
+          );
+        })}
+      </ul>
+      <p class="others">
+        {langs.filter((l) => l !== 'en').map((l) => <span lang={languages[l].hreflang}>{t(l).pages.notFound.h}</span>)}
+      </p>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .nf { text-align: center; padding: clamp(60px, 10vw, 120px) 0; }
+  .nf :global(.nf-logo) { width: 120px; height: auto; margin: 0 auto; overflow: visible; }
+  .nf :global(.nf-logo .a), .nf :global(.nf-logo .b), .nf :global(.nf-logo .mask-a) { stroke-dasharray: 1; stroke-dashoffset: 1; }
+  .nf :global(.nf-logo .a), .nf :global(.nf-logo .mask-a) { animation: draw .5s ease-in .2s forwards; }
+  .nf :global(.nf-logo .b) { animation: draw 1.4s cubic-bezier(.2,.4,.3,1) .7s forwards; }
+  @keyframes draw { to { stroke-dashoffset: 0; } }
+  .code { font-family: var(--serif); font-style: italic; font-size: clamp(64px, 10vw, 110px); line-height: 1; color: var(--pink-soft); margin-top: 10px; -webkit-text-stroke: 1px #E7B5C4; }
+  h1 { margin-top: 6px; }
+  .lead { margin: 16px auto 0; }
+  .homes { list-style: none; display: flex; justify-content: center; flex-wrap: wrap; gap: 10px; margin-top: 30px; }
+  .others { margin-top: 26px; display: flex; justify-content: center; gap: 18px; flex-wrap: wrap; font-family: var(--serif); font-style: italic; font-size: 20px; color: var(--muted); }
+</style>

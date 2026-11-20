@@ -1,0 +1,61 @@
+---
+// Long-form Markdown pages (research, privacy). Research also gets the partner form.
+import { getEntry, render } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import PageHeader from '../PageHeader.astro';
+import Form from '../Form.astro';
+import Icon from '../Icon.astro';
+import { languages, t, type Lang } from '../../i18n/utils';
+interface Props { lang: Lang; name: 'research' | 'privacy' }
+const { lang, name } = Astro.props;
+const s = t(lang);
+const entry = await getEntry('pages', `${lang}/${name}`);
+if (!entry) throw new Error(`Missing src/content/pages/${lang}/${name}.md`);
+const { Content } = await render(entry);
+const d = entry.data;
+const updated = new Intl.DateTimeFormat(languages[lang].hreflang, { dateStyle: 'long', timeZone: 'UTC' }).format(d.updated);
+const meta = s.pages[name];
+---
+<Base lang={lang} title={meta.title} description={meta.description} path={`/${name}/`}>
+  <PageHeader eyebrow={d.eyebrow} h1={d.h1} lead={d.lead} meta={`${s.pages.updated}: ${updated}`} />
+  <section class="body">
+    <div class="wrap">
+      <article class="prose reveal"><Content /></article>
+    </div>
+  </section>
+
+  {name === 'research' && (
+    <section class="partner" id="partner">
+      <div class="wrap grid">
+        <div class="reveal">
+          <span class="pi" aria-hidden="true"><Icon name="flask" size={26} /></span>
+          <h2>{s.pages.research.partnerH}</h2>
+          <p class="lead">{s.pages.research.partnerP}</p>
+        </div>
+        <div class="card reveal" style="--i:1">
+          <Form kind="partner" lang={lang} id="partner-form" />
+        </div>
+      </div>
+    </section>
+  )}
+</Base>
+
+<style>
+  .body { padding: clamp(48px, 7vw, 90px) 0; }
+  .prose :global(h2:first-child) { margin-top: 0; }
+  .prose :global(ol) { list-style: none; padding: 0; counter-reset: step; display: grid; gap: 14px; }
+  .prose :global(ol > li) { counter-increment: step; position: relative; padding: 18px 20px 18px 66px; background: var(--white); border: 1px solid #F1E4DA; border-radius: 18px; box-shadow: var(--shadow); margin: 0; }
+  .prose :global(ol > li)::before { content: counter(step); position: absolute; left: 18px; top: 16px; width: 34px; height: 34px; border-radius: 50%; display: grid; place-items: center; font-weight: 700; font-size: 14px; color: #fff; background: var(--grad); }
+  .prose :global(strong) { color: var(--burgundy); }
+  .prose :global(table) { background: var(--white); border-radius: 16px; overflow: hidden; box-shadow: var(--shadow); }
+  .prose :global(th), .prose :global(td) { padding: 14px 16px; }
+  .prose :global(thead th) { background: var(--pink-soft); }
+  .prose :global(blockquote) { background: var(--teal-soft); border-left-color: var(--teal-ink); border-radius: 0 14px 14px 0; padding: 14px 18px; font-style: normal; color: #11504B; }
+  @media (max-width: 640px) { .prose :global(table) { display: block; overflow-x: auto; } }
+
+  .partner { background: var(--white); border-top: 1px solid var(--line); }
+  .grid { display: grid; grid-template-columns: .9fr 1.1fr; gap: clamp(30px, 5vw, 70px); align-items: start; }
+  .pi { width: 54px; height: 54px; border-radius: 16px; display: grid; place-items: center; color: #fff; background: linear-gradient(135deg, var(--teal-ink), var(--teal)); margin-bottom: 18px; }
+  .partner .lead { margin-top: 14px; }
+  @media (max-width: 860px) { .grid { grid-template-columns: 1fr; } }
+</style>

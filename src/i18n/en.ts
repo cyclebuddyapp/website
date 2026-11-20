@@ -1,5 +1,5 @@
 // English strings. es.ts and fr.ts must have exactly the same shape (TypeScript checks this).
-// Wording about privacy, AI and data comes from concept.html. Ask Brady before changing it.
+// Wording about privacy, AI and data comes from concept.html or was approved by Brady. Ask before changing it.
 const en = {
   meta: {
     title: 'CycleBuddy · Know your cycle. Keep your data.',
@@ -27,7 +27,7 @@ const en = {
     lead: 'CycleBuddy is a period tracker with free menstrual health education. Your data stays on your phone, and a small, private AI runs right there with it.',
     ctaWait: 'Join the waitlist',
     ctaHow: 'How your data stays yours',
-    trust: ['On-device AI', 'Free education', 'Open source', 'English & Spanish'],
+    trust: ['On-device AI', 'Free education', 'Open source', 'English & Spanish · French soon'],
     phoneLabel: 'Preview of the CycleBuddy app, cycling through three screens',
   },
   phone: {
@@ -53,13 +53,11 @@ const en = {
     tabCircle: 'Circle',
     tabLearn: 'Learn',
     tabAlign: 'Align',
-    // Screen 2: logging
     logTitle: 'Today',
     logSub: 'How are you feeling?',
     logCycle: 'Day 14 of 28',
     logChips: ['Cramps 6/10', 'Low energy', 'Craving salt', 'Calm'],
     logSaved: 'Saved on this phone',
-    // Screen 3: learn
     epLevel: 'Level 1 · Episode 4',
     epTitle: 'Why do cramps happen?',
     epLen: '1:48',
@@ -78,9 +76,9 @@ const en = {
   },
   learn: {
     eyebrow: 'Learn · free for everyone',
-    h: 'Finally, menstrual health education worth watching.',
+    h: 'Finally! Menstrual health education worth watching.',
     p: "Three friends share an apartment and learn about their bodies together, one short episode at a time. It's honest, kind and never judgmental. It states the facts plainly and shows what usually isn't shown.",
-    free: 'Always free. In English and Spanish.',
+    free: 'Always free. In English and Spanish, with French soon.',
     items: [
       { h: 'High-quality', p: 'Accurate and reviewed, organized into levels from basics to advanced, and updated as research progresses.' },
       { h: 'Fun', p: 'A comedy series people actually want to watch, with episodes under two minutes.' },
@@ -109,6 +107,16 @@ const en = {
       { h: 'Private', p: 'It learns from your logs on your device. Your cycle never has to leave your phone to make the app useful.' },
       { h: 'Aligned', p: "Designed for your wellbeing first. It picks from reviewed guidance, says when it isn't sure, and points you to a doctor when something needs one." },
     ],
+    // NEW, needs Brady's approval (AI wording): plain-language explainer of "local AI"
+    localH: 'What does “local AI” mean?',
+    localP:
+      '“Local” simply means the AI does its work inside the CycleBuddy app, on your phone, instead of sending your information to a company’s servers. Think of your phone’s calculator: it works on its own, even offline.',
+    localItems: [
+      'It only sees what you log in CycleBuddy. It can’t open your messages, photos, contacts or other apps.',
+      'It can’t make calls, send messages or change anything on your phone. It suggests; you decide.',
+      'Its code is open source, so anyone can check exactly what it does.',
+    ],
+    localMore: 'More questions about the AI',
   },
   data: {
     eyebrow: 'Your data',
@@ -133,9 +141,10 @@ const en = {
       { n: '1×1', h: 'Consent per study', p: "Each study asks separately. You see the lab, the question and what's shared before you say yes. Anonymized before it leaves your phone." },
       { n: '↺', h: 'Findings go back to you', p: "When a study you joined publishes, you'll hear about it in plain language, and the education series is updated to match." },
     ],
-    partnerB: "Are you a women's health researcher?",
-    partnerS: "We're looking for university partners for our first consented study.",
+    partnerB: "Do you research women's health?",
+    partnerS: "We're looking for university and industry partners for our first consented study.",
     partnerCta: 'Partner with us',
+    more: 'How our research works',
   },
   blog: {
     eyebrow: 'Blog',
@@ -145,16 +154,16 @@ const en = {
     min: 'min read',
     back: 'All posts',
     listTitle: 'Blog',
+    listH: 'Notes from building CycleBuddy',
     listLead: 'Notes, research and video diaries from building CycleBuddy in the open.',
     published: 'Published',
-    draftNote: 'This post is a draft placeholder. The full article is coming soon.',
   },
   mission: {
     eyebrow: 'Mission',
     h: "Menstrual health that's understood, private and free to learn.",
     items: [
       { h: 'For every woman', p: 'Education stays free, so knowing your own body never depends on what you can pay.' },
-      { h: 'Built for Latin America too', p: 'Spanish from the start, and it works offline on affordable phones, with no data plan needed for the private AI.' },
+      { h: 'Wherever you are', p: 'It works offline, even on affordable phones, and the private AI needs no data plan. In English and Spanish, with French soon.' },
       { h: 'Teens and schools, next', p: 'A free teen version and classroom materials are planned: on-device, encrypted and open source, with no data sharing, ever.' },
     ],
     teachers: 'Teachers, get in touch',
@@ -164,7 +173,7 @@ const en = {
     h: 'Built in the open',
     role: 'Founder & CEO',
     bio: "Mathematician (PhD, University of Waterloo), data scientist and award-winning machine learning researcher focused on AI safety. I'm building CycleBuddy because women deserve to understand their bodies without giving up their privacy.",
-    photoAlt: 'Brady, founder of CycleBuddy',
+    photoAlt: 'Brady, Founder & CEO of CycleBuddy',
     awardH: '1st place, Stellar track',
     awardP: 'EasyA × Consensus Hackathon, Toronto, 2025, with a $20,000 USD prize in lumens from the Stellar Development Foundation.',
     awardAlt: 'The CycleBuddy team on stage at the EasyA × Consensus hackathon in Toronto, holding the first-place cheque',
@@ -172,7 +181,7 @@ const en = {
   cta: {
     eyebrow: 'Be first',
     h: 'Ready for a period app you can trust?',
-    p: "Join the waitlist for CycleBuddy v2. We'll write only when there's something worth your time.",
+    p: "Join the CycleBuddy waitlist. We'll write only when there's something worth your time.",
     waitlistH: 'Join the waitlist',
     contactH: 'Contact us',
     contactP: 'Questions, ideas or partnerships. We read every message.',
@@ -182,7 +191,7 @@ const en = {
     email: 'Email',
     message: 'Message',
     country: 'Country (optional)',
-    institution: 'Institution',
+    institution: 'University, lab or company',
     submitWaitlist: 'Join the waitlist',
     submitContact: 'Send message',
     submitPartner: 'Send',
@@ -197,6 +206,42 @@ const en = {
     privacyNote: 'We only use this to reply to you.',
     privacyNoteWaitlist: 'We only use your email to tell you about CycleBuddy. Unsubscribe anytime.',
     privacyLink: 'Privacy policy',
+  },
+  pages: {
+    research: {
+      title: 'Research · CycleBuddy',
+      description: 'How CycleBuddy research works: consent for every study, what we heard in our interviews, and how universities and companies can partner with us.',
+      partnerH: 'Partner with us',
+      partnerP: "Universities, research labs and companies working on women's health: tell us about your question and we'll get back to you.",
+    },
+    privacy: {
+      title: 'Privacy policy · CycleBuddy',
+      description: 'What this website collects (only what you send through its forms), why, and how to have it deleted. No cookies, no trackers.',
+    },
+    facts: {
+      title: 'CycleBuddy facts',
+      description: 'Verified facts about CycleBuddy: what it is, platforms, languages, price, where your data is stored, launch timing and contact.',
+      eyebrow: 'Facts',
+      h: 'CycleBuddy at a glance',
+      lead: 'Plain, verified facts about CycleBuddy. When something changes, this page changes first.',
+      verified: 'Last verified',
+      colTopic: 'Topic',
+      colAnswer: 'Answer',
+    },
+    faq: {
+      title: 'FAQ · CycleBuddy',
+      description: 'Answers to common questions about CycleBuddy: price, privacy, where your data is stored, the on-device AI, languages and launch.',
+      eyebrow: 'FAQ',
+      h: 'Frequently asked questions',
+      lead: "Short, honest answers. Can't find yours? Write to hello@cyclebuddy.ca.",
+    },
+    notFound: {
+      title: 'Page not found · CycleBuddy',
+      h: "This page isn't here.",
+      p: 'The link may be old or mistyped. Let’s get you back.',
+      home: 'Back to home',
+    },
+    updated: 'Last updated',
   },
   footer: {
     tagline: 'Know your cycle. Keep your data.',

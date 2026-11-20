@@ -1,0 +1,30 @@
+---
+// Header for inner pages: eyebrow, the page's single <h1>, a lead paragraph, optional meta line.
+interface Props { eyebrow: string; h1: string; lead?: string; meta?: string }
+const { eyebrow, h1, lead, meta } = Astro.props;
+---
+<header class="ph">
+  <div class="aurora" aria-hidden="true"><i></i><i></i></div>
+  <div class="wrap">
+    <p class="eyebrow rise" style="--d:0">{eyebrow}</p>
+    <h1 class="rise" style="--d:1">{h1}</h1>
+    {lead && <p class="lead rise" style="--d:2">{lead}</p>}
+    {meta && <p class="meta rise" style="--d:3">{meta}</p>}
+    <slot />
+  </div>
+</header>
+
+<style>
+  .ph { position: relative; overflow: hidden; padding: clamp(56px, 8vw, 100px) 0 clamp(40px, 5vw, 64px); border-bottom: 1px solid var(--line); }
+  .aurora { position: absolute; inset: -20% -10% 0; z-index: -1; filter: blur(60px); opacity: .7; pointer-events: none; }
+  .aurora i { position: absolute; border-radius: 50%; }
+  .aurora i:nth-child(1) { width: 520px; height: 520px; left: -6%; top: -30%; background: radial-gradient(circle, rgba(204,52,102,.26), transparent 65%); animation: d1 22s ease-in-out infinite; }
+  .aurora i:nth-child(2) { width: 460px; height: 460px; right: -4%; top: -10%; background: radial-gradient(circle, rgba(45,169,160,.22), transparent 65%); animation: d2 26s ease-in-out infinite; }
+  @keyframes d1 { 50% { transform: translate(10%, 12%) scale(1.1); } }
+  @keyframes d2 { 50% { transform: translate(-12%, 8%) scale(.9); } }
+  h1 { font-size: clamp(42px, 6vw, 72px); max-width: 900px; }
+  .lead { margin-top: 18px; max-width: 680px; }
+  .meta { margin-top: 18px; font-size: 13px; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; color: var(--teal-ink); }
+  .rise { animation: rise .9s var(--ease) both; animation-delay: calc(.05s + var(--d) * .1s); }
+  @keyframes rise { from { opacity: 0; transform: translateY(18px); } }
+</style>

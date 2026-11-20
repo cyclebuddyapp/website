@@ -17,4 +17,15 @@ const blog = defineCollection({
   }),
 });
 
-export const collections = { blog };
+// Long-form pages (research, privacy) live in src/content/pages/<lang>/<name>.md.
+const pages = defineCollection({
+  loader: glob({ pattern: '**/*.md', base: './src/content/pages' }),
+  schema: z.object({
+    eyebrow: z.string(),
+    h1: z.string(),
+    lead: z.string(),
+    updated: z.coerce.date(),
+  }),
+});
+
+export const collections = { blog, pages };

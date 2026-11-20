@@ -1,0 +1,53 @@
+---
+import { render } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import Icon from '../Icon.astro';
+import { slugOf, type Post } from '../../data/blog';
+import { languages, localize, t, type Lang } from '../../i18n/utils';
+interface Props { lang: Lang; post: Post }
+const { lang, post } = Astro.props;
+const s = t(lang).blog;
+const d = post.data;
+const { Content } = await render(post);
+const date = new Intl.DateTimeFormat(languages[lang].hreflang, { dateStyle: 'long', timeZone: 'UTC' }).format(d.date);
+---
+<Base lang={lang} title={`${d.title} · CycleBuddy`} description={d.description} path={`/blog/${slugOf(post)}/`} ogType="article" noindex={d.draft}>
+  <article>
+    <header class="head">
+      <div class:list={['cover', d.cover]} aria-hidden="true"><span>{d.coverText}</span></div>
+      <div class="wrap narrow">
+        <a class="back text-link" href={localize(lang, '/blog/')}><span class="flip"><Icon name="arrow" size={16} /></span>{s.back}</a>
+        <p class="meta">
+          {d.category}{d.readMinutes && ` · ${d.readMinutes} ${s.min}`}
+          {d.draft && <span class="draft">{s.draft}</span>}
+        </p>
+        <h1>{d.title}</h1>
+        <p class="lead">{d.description}</p>
+        <p class="date">{s.published}: <time datetime={d.date.toISOString().slice(0, 10)}>{date}</time></p>
+      </div>
+    </header>
+    <div class="wrap narrow">
+      <div class="prose body"><Content /></div>
+    </div>
+  </article>
+</Base>
+
+<style>
+  .narrow { max-width: 820px; }
+  .cover { height: clamp(160px, 24vw, 260px); display: grid; place-items: center; font-family: var(--serif); font-size: clamp(80px, 12vw, 140px); font-weight: 700; color: rgba(255,255,255,.92); overflow: hidden; }
+  .cover span { animation: zoom 1.4s var(--ease) both; }
+  @keyframes zoom { from { opacity: 0; transform: scale(.8) rotate(-4deg); } }
+  .rose { background: linear-gradient(135deg, #800020, #CC3466); }
+  .teal { background: linear-gradient(135deg, #1B716B, #2DA9A0); }
+  .night { background: linear-gradient(135deg, #3B2A2E, #800020); }
+  .head .wrap { padding-top: 34px; }
+  .back { font-size: 14px; }
+  .flip { display: inline-flex; transform: rotate(180deg); }
+  .meta { margin-top: 26px; display: flex; gap: 10px; align-items: center; flex-wrap: wrap; font-size: 12px; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; color: var(--teal-ink); }
+  .draft { background: #FFF1D6; color: #7A5A0E; border-radius: 6px; padding: 2px 8px; }
+  h1 { margin-top: 12px; font-size: clamp(38px, 5.4vw, 60px); }
+  .lead { margin-top: 16px; }
+  .date { margin-top: 14px; font-size: 14px; color: var(--muted); }
+  .body { padding: 36px 0 clamp(70px, 9vw, 110px); border-top: 1px solid var(--line); margin-top: 30px; }
+  .body :global(blockquote) { background: #FFF6E2; border-left-color: #C9962B; border-radius: 0 14px 14px 0; padding: 14px 18px; font-style: normal; color: #5E470C; }
+</style>

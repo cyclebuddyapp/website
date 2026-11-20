@@ -1,0 +1,49 @@
+---
+// /facts: plain, scannable, verified facts. Data comes from src/data/facts.ts (shared with llms.txt).
+import Base from '../../layouts/Base.astro';
+import PageHeader from '../PageHeader.astro';
+import { FACTS, FACTS_VERIFIED } from '../../data/facts';
+import { languages, t, type Lang } from '../../i18n/utils';
+interface Props { lang: Lang }
+const { lang } = Astro.props;
+const s = t(lang).pages.facts;
+const verified = new Intl.DateTimeFormat(languages[lang].hreflang, { dateStyle: 'long', timeZone: 'UTC' }).format(new Date(FACTS_VERIFIED));
+---
+<Base lang={lang} title={s.title} description={s.description} path="/facts/">
+  <PageHeader eyebrow={s.eyebrow} h1={s.h} lead={s.lead} meta={`${s.verified}: ${verified}`} />
+  <section class="body">
+    <div class="wrap">
+      <table class="facts reveal">
+        <caption class="sr-only">{s.h}</caption>
+        <thead><tr><th scope="col">{s.colTopic}</th><th scope="col">{s.colAnswer}</th></tr></thead>
+        <tbody>
+          {FACTS[lang].map((f) => (
+            <tr id={f.id}>
+              <th scope="row">{f.topic}</th>
+              <td>{f.id === 'contact' ? <a href={`mailto:${f.answer}`}>{f.answer}</a> : f.answer}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .body { padding: clamp(40px, 6vw, 80px) 0 clamp(70px, 9vw, 110px); }
+  .facts { width: 100%; max-width: 900px; border-collapse: separate; border-spacing: 0; background: var(--white); border-radius: var(--r); overflow: hidden; box-shadow: var(--shadow); border: 1px solid #F1E4DA; font-size: 16.5px; }
+  .facts thead th { background: var(--burgundy); color: #fff; text-align: left; font-size: 12px; letter-spacing: .14em; text-transform: uppercase; padding: 14px 22px; }
+  .facts tbody th, .facts td { padding: 18px 22px; border-top: 1px solid var(--line); text-align: left; vertical-align: top; }
+  .facts tbody th { width: 30%; font-family: var(--serif); font-size: 22px; font-weight: 600; color: var(--burgundy); line-height: 1.2; }
+  .facts tbody tr { transition: background-color .3s; }
+  .facts tbody tr:hover { background: var(--ivory-2); }
+  .facts tbody tr:target { background: var(--teal-soft); }
+  .facts a { color: var(--pink-ink); }
+  @media (max-width: 640px) {
+    .facts thead { display: none; }
+    .facts, .facts tbody, .facts tr, .facts th, .facts td { display: block; width: 100%; }
+    .facts tbody th { border-top: 1px solid var(--line); padding-bottom: 4px; }
+    .facts td { border-top: 0; padding-top: 0; }
+    .facts tbody tr:first-child th { border-top: 0; }
+  }
+</style>
