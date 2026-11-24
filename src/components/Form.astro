@@ -97,6 +97,11 @@ const ok = kind === 'waitlist' ? f.okWaitlist : f.okContact;
 
     const show = (kind: 'ok' | 'error', msg: string) => { status.className = `form-status ${kind}`; status.textContent = msg; };
 
+    // Light bot check, no third parties: how long the form was open, and whether a person typed or tapped in it.
+    const opened = Date.now();
+    let touched = 0;
+    ['keydown', 'pointerdown', 'input', 'paste'].forEach((ev) => form.addEventListener(ev, () => { touched++; }, { passive: true }));
+
     form.addEventListener('submit', async (e) => {
       e.preventDefault();
       if (!validate()) return;
@@ -106,6 +111,7 @@ const ok = kind === 'waitlist' ? f.okWaitlist : f.okContact;
       try {
         const body = Object.fromEntries(new FormData(form).entries());
         delete (body as Record<string, unknown>).redirect;
+        Object.assign(body, { _e: Date.now() - opened, _h: touched });
         const res = await fetch(d.endpoint, { method: 'POST', headers: { 'Content-Type': 'application/json', Accept: 'application/json' }, body: JSON.stringify(body) });
         if (res.ok) { form.reset(); show('ok', d.ok!); }
         else show('error', res.status === 429 ? d.errRate! : d.err!);

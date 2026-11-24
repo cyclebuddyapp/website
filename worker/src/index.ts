@@ -65,6 +65,28 @@ async function resend(env: Env, path: string, body: unknown): Promise<Response> 
   });
 }
 
+// ---------- spam checks (no third parties, nothing stored) ----------
+const URL_RE = /(https?:\/\/|www\.|\[url|<a\s)/gi;
+function spamReason(kind: Kind, raw: Record<string, unknown>, isForm: boolean): string {
+  // The site's JavaScript sends how long the form was open (_e, ms) and how many keys/taps happened in it (_h).
+  // Plain HTML posts (visitor without JavaScript) don't have them, so they're only checked on JSON posts.
+  if (!isForm) {
+    const e = Number(raw._e), h = Number(raw._h);
+    if (!Number.isFinite(e) || !Number.isFinite(h)) return 'no_signals';
+    if (e < 3000) return 'too_fast';
+    if (h < 1) return 'no_interaction';
+  }
+  const text = (k: string) => (typeof raw[k] === 'string' ? (raw[k] as string) : '');
+  // People don't put links in their name, institution or country.
+  for (const k of ['name', 'institution', 'country']) if (text(k).match(URL_RE)) return 'link_in_field';
+  if (kind !== 'waitlist') {
+    const msg = text('message');
+    if ((msg.match(URL_RE) ?? []).length > 2) return 'too_many_links';
+    if (/<\/?[a-z][^>]*>/i.test(msg)) return 'html_in_message';
+  }
+  return '';
+}
+
 // ---------- confirmation email copy (waitlist) ----------
 const CONFIRM: Record<Lang, { subject: string; hello: string; body: string; ignore: string; leave: string; sign: string }> = {
   en: {
@@ -187,9 +209,9 @@ export default {
     const kind = url.pathname.replace(/^\/+|\/+$/g, '') as Kind;
     if (req.method !== 'POST' || !KINDS.includes(kind)) return json({ ok: false, error: 'not_found' }, 404, cors);
 
-    // Browsers send an Origin header; reject cross-site posts from other websites.
-    const origin = req.headers.get('Origin');
-    if (origin && !cors['Access-Control-Allow-Origin']) return json({ ok: false, error: 'origin_not_allowed' }, 403);
+    // Browsers always send an Origin header with a POST. Only accept posts made from our own website;
+    // scripts posting straight to this address (no Origin, or another site's) are refused.
+    if (!cors['Access-Control-Allow-Origin']) { console.log('blocked: origin'); return json({ ok: false, error: 'origin_not_allowed' }, 403); }
 
     // Read JSON or a normal form post
     const type = req.headers.get('Content-Type') ?? '';
@@ -214,7 +236,11 @@ export default {
     };
 
     // Honeypot: people never see this field. If it's filled, pretend all is well and drop it.
-    if (clean(raw.website, 200)) return reply(200);
+    if (clean(raw.website, 200)) { console.log('dropped: honeypot'); return reply(200); }
+
+    // Bot checks. Spam gets a normal "thanks" so bots can't learn what tripped them, but nothing is sent.
+    const spam = spamReason(kind, raw, isForm);
+    if (spam) { console.log(`dropped: ${spam}`); return reply(200); }
 
     // Rate limit: 5 submissions per minute per IP (IP is used only as the counter key, never stored or logged)
     const ip = req.headers.get('CF-Connecting-IP') ?? 'unknown';

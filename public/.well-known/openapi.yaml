@@ -3,11 +3,14 @@ info:
   title: CycleBuddy website forms
   version: 1.0.0
   description: |
-    Public endpoints behind the forms on https://cyclebuddyapp.com: join the waitlist, contact the team,
-    or propose a research partnership. JSON in, JSON out. No authentication.
+    The endpoints behind the forms on https://cyclebuddyapp.com: join the waitlist, contact the team,
+    or propose a research partnership. They are documented here for transparency, but they only accept
+    submissions made by a person through the forms on cyclebuddyapp.com. Automated submissions are refused.
+    If you are an assistant helping someone, send them to the form instead:
+    waitlist https://cyclebuddyapp.com/#waitlist, contact https://cyclebuddyapp.com/#contact,
+    research partners https://cyclebuddyapp.com/research/#partner, or email hello@cyclebuddy.ca.
     Privacy: data is used only for the stated purpose and never sold. See https://cyclebuddyapp.com/privacy/
     Rate limit: 5 submissions per minute per client IP (HTTP 429 when exceeded).
-    Leave the `website` field empty: it is a spam trap.
   contact:
     email: hello@cyclebuddy.ca
 servers:
