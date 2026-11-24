@@ -13,6 +13,7 @@ const blog = defineCollection({
     readMinutes: z.number().optional(),
     cover: z.enum(['rose', 'teal', 'night']).default('rose'),
     coverText: z.string().max(4),
+    art: z.enum(['small-ai']).optional(),
     draft: z.boolean().default(false),
   }),
 });
