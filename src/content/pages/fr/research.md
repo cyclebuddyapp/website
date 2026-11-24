@@ -1,33 +1,20 @@
 ---
 eyebrow: Recherche
-h1: La recherche avec les femmes, pas sur elles.
-lead: "La santé des femmes reste trop peu étudiée. CycleBuddy permet à celles qui le souhaitent de faire avancer la science, selon leurs propres conditions, et leur partage ce que nous apprenons."
-updated: 2026-11-20
+h1: Tes données, ta décision.
+lead: "Quand nous avons interrogé des femmes sur leurs données de santé, les réponses étaient partagées. Certaines étaient heureuses de les confier à des laboratoires qui font avancer la santé des femmes. D’autres ne voulaient jamais les partager, avec personne. Les deux ont raison. C’est ça, être vraiment propriétaire de ses données : la décision t’appartient."
+updated: 2026-11-23
 ---
 
-## Comment fonctionne le consentement
+## Notre rôle : les protéger, et te laisser décider
 
-Partager des données avec la recherche est toujours ton choix, et ce n’est jamais activé par défaut. Voici comment ça se passe, étape par étape :
+CycleBuddy ne décide pas à ta place. Notre rôle est de protéger tes données du mieux possible, puis de respecter ton choix.
 
-1. **Une étude te le demande.** Une équipe de recherche propose une question précise. Chaque étude te demande ton accord séparément. Il n’y a pas de consentement global.
-2. **Tu vois tout d’abord.** Avant de décider, tu vois qui fait la demande, la question de recherche et exactement ce qui serait partagé.
-3. **Rien n’est partagé sans ton oui.** Si tu dis non, rien ne quitte ton téléphone.
-4. **Anonymisé sur ton téléphone.** Si tu dis oui, tes données sont anonymisées avant de quitter ton téléphone.
-5. **Tu peux arrêter quand tu veux.** Quitter une étude met fin à tout partage. Les données déjà partagées avec un laboratoire ne peuvent pas être récupérées, et nous te le dirons toujours clairement avant que tu participes.
-6. **Les résultats te reviennent.** Quand une étude à laquelle tu as participé est publiée, nous te l’expliquons en langage clair, et la série éducative est mise à jour en conséquence.
+- **Protégées par défaut.** Tes saisies sont chiffrées et restent sur ton téléphone. Le partage est désactivé, et le reste tant que tu ne l’actives pas.
+- **Tu ne veux jamais partager ? Alors rien n’est jamais partagé.** C’est une réponse complète, et l’application fonctionne tout aussi bien.
+- **Tu veux aider la science ?** Tu peux rejoindre une étude, une à la fois. Avant de dire oui, tu vois qui demande, ce qu’on cherche à comprendre et exactement ce qui serait partagé. Tu peux arrêter quand tu veux.
 
-## Ce que les femmes nous ont dit
+## La suite : nos premières études
 
-Nous avons commencé par écouter. Au moins 17 femmes de 18 à 40 ans ont répondu à notre questionnaire sur les règles, les applis de suivi et la vie privée. Leurs réponses ont façonné chaque fonctionnalité, du format éducatif aux réglages de confidentialité par défaut. D’autres voix du Pérou s’ajouteront bientôt.
+Nous préparons nos premières études et nous cherchons des partenaires : universités, laboratoires de recherche et entreprises qui travaillent sur la santé des femmes.
 
-Quelques thèmes qui sont ressortis :
-
-- Les longs articles sur la santé menstruelle sont difficiles à lire jusqu’au bout.
-- On sait rarement ce que les applis de règles font des données qu’on y note.
-- Les femmes veulent une éducation courte et honnête, et un vrai contrôle sur leurs propres données.
-
-> Les résultats complets seront publiés bientôt dans un article du blogue.
-
-## Avec qui nous voulons travailler
-
-Nous cherchons des universités et des entreprises partenaires pour notre première étude avec consentement : universités, laboratoires et entreprises qui travaillent en santé des femmes. Chaque partenariat suit le modèle de consentement décrit plus haut, sans exception.
+Chaque partenariat suit la même règle : chaque femme décide pour elle-même, étude par étude.

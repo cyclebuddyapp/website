@@ -210,7 +210,7 @@ const en = {
   pages: {
     research: {
       title: 'Research · CycleBuddy',
-      description: 'How CycleBuddy research works: consent for every study, what women told us, and how universities and companies can partner with us.',
+      description: 'Owning your data means deciding what happens to it. How CycleBuddy protects your choice, and how universities and companies can partner on our first studies.',
       partnerH: 'Partner with us',
       partnerP: "Universities, research labs and companies working on women's health: tell us about your question and we'll get back to you.",
     },

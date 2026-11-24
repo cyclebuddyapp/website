@@ -214,7 +214,7 @@ const fr: Dict = {
   pages: {
     research: {
       title: 'Recherche · CycleBuddy',
-      description: 'Comment fonctionne la recherche chez CycleBuddy : un consentement pour chaque étude, ce que les femmes nous ont dit, et comment les universités et les entreprises peuvent devenir partenaires.',
+      description: 'Être propriétaire de ses données, c’est décider de ce qu’il en advient. Comment CycleBuddy protège ton choix, et comment universités et entreprises peuvent participer à nos premières études.',
       partnerH: 'Devenir partenaire',
       partnerP: 'Universités, laboratoires et entreprises qui travaillent en santé des femmes : parlez-nous de votre question de recherche, et nous vous répondrons.',
     },

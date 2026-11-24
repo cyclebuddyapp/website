@@ -1,33 +1,20 @@
 ---
 eyebrow: Research
-h1: Research with women, not on them.
-lead: "Women's health is understudied. CycleBuddy lets the women who want to help move science forward, on their own terms, and shares back what we learn."
-updated: 2026-11-20
+h1: Your data, your decision.
+lead: "When we asked women about their health data, the answers split. Some were happy to share it with labs advancing women's health. Others never wanted it shared, with anyone. Both are right. That's what owning your data really means: the decision is yours."
+updated: 2026-11-23
 ---
 
-## How consent works
+## Our job: keep it safe, and let you decide
 
-Sharing data with research is always your choice, and it is never on by default. Here is what happens, step by step:
+CycleBuddy doesn't decide for you. Our job is to protect your data as strongly as we can, and then respect your choice.
 
-1. **A study asks.** A research partner proposes one specific question. Each study asks you separately. There is no blanket consent.
-2. **You see everything first.** Before you decide, you see who is asking, the research question and exactly what would be shared.
-3. **Nothing is shared unless you say yes.** If you say no, nothing leaves your phone.
-4. **Anonymized on your phone.** If you say yes, your data is anonymized before it leaves your phone.
-5. **You can stop anytime.** Leaving a study stops any further sharing. Data already shared with a lab can't be recalled, and we will always tell you that plainly before you join.
-6. **Findings come back to you.** When a study you joined publishes, you'll hear about it in plain language, and the education series is updated to match.
+- **Protected by default.** Your logs are encrypted and stay on your phone. Sharing is off, and it stays off unless you turn it on.
+- **Never want to share? Then you never will.** That's a complete answer, and the app works fully either way.
+- **Want to help science?** You can join a study, one at a time. Before you say yes, you see who is asking, what they want to learn and exactly what would be shared. You can stop anytime.
 
-## What women told us
+## What's next: our first studies
 
-We started by listening. 17+ women aged 18 to 40 answered our questionnaire about periods, period apps and privacy. Their answers shaped every feature, from the education format to the privacy defaults. More voices from Peru are coming soon.
+We're preparing our first studies, and we're looking for partners: universities, research labs and companies working on women's health.
 
-Some of the themes that came up:
-
-- Long articles about menstrual health are hard to get through.
-- It is often unclear what period apps do with the data people log.
-- People want short, honest education, and real control over their own data.
-
-> The full findings are coming in a dedicated blog post.
-
-## Who we want to work with
-
-We're looking for university and industry partners for our first consented study: universities, research labs and companies working on women's health. Every partnership follows the consent model above, with no exceptions.
+Every partnership follows the same rule: each woman decides for herself, study by study.
