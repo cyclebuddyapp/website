@@ -204,7 +204,7 @@ export default {
     const cors = corsHeaders(req, env);
 
     if (req.method === 'OPTIONS') return new Response(null, { status: 204, headers: cors });
-    if (req.method === 'GET' && url.pathname === '/') return json({ ok: true, service: 'cyclebuddy-forms', endpoints: KINDS.map((k) => `POST /${k}`), docs: `${env.SITE_URL}/.well-known/openapi.yaml` }, 200);
+    if (req.method === 'GET' && url.pathname === '/') return json({ ok: true }, 200);
 
     const kind = url.pathname.replace(/^\/+|\/+$/g, '') as Kind;
     if (req.method !== 'POST' || !KINDS.includes(kind)) return json({ ok: false, error: 'not_found' }, 404, cors);

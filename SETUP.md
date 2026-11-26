@@ -80,8 +80,7 @@ Wrangler prints the Worker's address, e.g. `https://cyclebuddy-forms.<your-subdo
 1. GitHub → repo **Settings → Secrets and variables → Actions → Variables → New repository variable**
    - Name: `PUBLIC_FORMS_ENDPOINT`
    - Value: the Worker address from step 3 (no trailing slash)
-2. Update the `servers.url` in `public/.well-known/openapi.yaml` to the same address.
-3. Push any commit (or *Actions → Deploy to GitHub Pages → Run workflow*) so the site rebuilds with the address.
+2. Push any commit (or *Actions → Deploy to GitHub Pages → Run workflow*) so the site rebuilds with the address.
 
 For local development, create `website/.env` with `PUBLIC_FORMS_ENDPOINT=…` (it's git-ignored).
 
