@@ -13,6 +13,7 @@
 
 export interface Env {
   RESEND_API_KEY: string; // secret: `npx wrangler secret put RESEND_API_KEY`
+  TURNSTILE_SECRET?: string; // secret: Cloudflare Turnstile. When set, every submission must pass the "not a robot" check.
   RESEND_SEGMENT_ID?: string; // optional: Resend segment ("list") for the waitlist
   ALLOWED_ORIGINS: string; // comma-separated
   TO_EMAIL: string;
@@ -63,6 +64,19 @@ async function resend(env: Env, path: string, body: unknown): Promise<Response> 
     headers: { Authorization: `Bearer ${env.RESEND_API_KEY}`, 'Content-Type': 'application/json', 'User-Agent': UA },
     body: JSON.stringify(body),
   });
+}
+
+// ---------- "not a robot" check (Cloudflare Turnstile) ----------
+async function human(env: Env, tok: unknown): Promise<boolean> {
+  if (typeof tok !== 'string' || !tok || tok.length > 2048) return false;
+  const r = await fetch('https://challenges.cloudflare.com/turnstile/v0/siteverify', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json', 'User-Agent': UA },
+    body: JSON.stringify({ secret: env.TURNSTILE_SECRET, response: tok }),
+  });
+  if (!r.ok) return false;
+  const v = (await r.json()) as { success?: boolean; hostname?: string };
+  return v.success === true && (!v.hostname || /(^|\.)cyclebuddyapp\.com$|^localhost$/.test(v.hostname));
 }
 
 // ---------- spam checks (no third parties, nothing stored) ----------
@@ -241,6 +255,12 @@ export default {
     // Bot checks. Spam gets a normal "thanks" so bots can't learn what tripped them, but nothing is sent.
     const spam = spamReason(kind, raw, isForm);
     if (spam) { console.log(`dropped: ${spam}`); return reply(200); }
+
+    // "Not a robot" check, once the Turnstile secret is configured. Needs JavaScript, like most of the web.
+    if (env.TURNSTILE_SECRET && !(await human(env, raw['cf-turnstile-response']))) {
+      console.log('blocked: turnstile');
+      return reply(403, 'verification_failed');
+    }
 
     // Rate limit: 5 submissions per minute per IP (IP is used only as the counter key, never stored or logged)
     const ip = req.headers.get('CF-Connecting-IP') ?? 'unknown';

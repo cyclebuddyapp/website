@@ -1,7 +1,7 @@
 ---
 // One component for the three forms. Plain, labelled HTML so it works without JS and for agents.
 // With JS: validates in the page, posts JSON to the Worker and shows the result inline (no alerts, no reload).
-import { FORMS_ENDPOINT } from '../data/site';
+import { FORMS_ENDPOINT, TURNSTILE_SITEKEY } from '../data/site';
 import { localize, t, type Lang } from '../i18n/utils';
 interface Props { kind: 'waitlist' | 'contact' | 'partner'; lang: Lang; id: string }
 const { kind, lang, id } = Astro.props;
@@ -13,7 +13,8 @@ const ok = kind === 'waitlist' ? f.okWaitlist : f.okContact;
 <form
   class="cb-form" id={id} action={action} method="post" novalidate
   data-endpoint={FORMS_ENDPOINT ? action : ''}
-  data-ok={ok} data-err={f.errGeneric} data-err-email={f.errEmail} data-err-required={f.errRequired} data-err-rate={f.errRate} data-sending={f.sending}
+  data-ok={ok} data-err={f.errGeneric} data-err-email={f.errEmail} data-err-required={f.errRequired} data-err-rate={f.errRate} data-err-bot={f.errBot} data-sending={f.sending}
+  data-sitekey={TURNSTILE_SITEKEY} data-lang={lang}
 >
   <input type="hidden" name="language" value={lang} />
   <input type="hidden" name="redirect" value={localize(lang, '/') } />
@@ -57,6 +58,7 @@ const ok = kind === 'waitlist' ? f.okWaitlist : f.okContact;
     <input id={`${id}-website`} name="website" type="text" tabindex="-1" autocomplete="off" />
   </div>
 
+  <div class="ts"></div>
   <button class="btn btn-primary" type="submit">{submit}</button>
   <p class="form-status" role="status" aria-live="polite"></p>
   <p class="form-note">{kind === 'waitlist' ? f.privacyNoteWaitlist : f.privacyNote} <a href={localize(lang, '/privacy/')}>{f.privacyLink}</a></p>
@@ -65,10 +67,24 @@ const ok = kind === 'waitlist' ? f.okWaitlist : f.okContact;
 <style>
   .cb-form { position: relative; display: grid; gap: 16px; }
   .cb-form .btn { justify-self: start; }
+  .cb-form .ts:empty { display: none; }
   .cb-form .btn[disabled] { opacity: .7; cursor: progress; transform: none; }
 </style>
 
 <script>
+  type Turnstile = { render(el: HTMLElement, o: Record<string, unknown>): string; getResponse(id: string): string | undefined; reset(id: string): void };
+  declare global { interface Window { turnstile?: Turnstile } }
+  let loading: Promise<Turnstile> | undefined;
+  function loadTurnstile(): Promise<Turnstile> {
+    return (loading ??= new Promise((resolve, reject) => {
+      const s = document.createElement('script');
+      s.src = 'https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit';
+      s.async = true;
+      s.onload = () => (window.turnstile ? resolve(window.turnstile) : reject());
+      s.onerror = () => { loading = undefined; reject(); };
+      document.head.appendChild(s);
+    }));
+  }
   const EMAIL = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
   document.querySelectorAll<HTMLFormElement>('form.cb-form').forEach((form) => {
     const status = form.querySelector<HTMLElement>('.form-status')!;
@@ -102,6 +118,31 @@ const ok = kind === 'waitlist' ? f.okWaitlist : f.okContact;
     let touched = 0;
     ['keydown', 'pointerdown', 'input', 'paste'].forEach((ev) => form.addEventListener(ev, () => { touched++; }, { passive: true }));
 
+    // "Not a robot" check (Cloudflare Turnstile). Loaded only once someone starts using a form,
+    // so just visiting the site contacts no third party. Usually invisible; it shows a box only if it needs a click.
+    let widget: string | undefined;
+    const startCheck = () => {
+      if (!d.sitekey || widget !== undefined) return;
+      widget = '';
+      loadTurnstile().then((ts) => {
+        widget = ts.render(form.querySelector<HTMLElement>('.ts')!, {
+          sitekey: d.sitekey!, language: d.lang, theme: 'light', appearance: 'interaction-only', 'refresh-expired': 'auto',
+        });
+      }).catch(() => { widget = undefined; });
+    };
+    form.addEventListener('focusin', startCheck);
+    form.addEventListener('pointerdown', startCheck);
+    const token = async () => {
+      if (!d.sitekey) return '';
+      startCheck();
+      for (let i = 0; i < 40; i++) { // wait up to ~10 s for the check to finish
+        const t = widget && window.turnstile?.getResponse(widget);
+        if (t) return t;
+        await new Promise((r) => setTimeout(r, 250));
+      }
+      return '';
+    };
+
     form.addEventListener('submit', async (e) => {
       e.preventDefault();
       if (!validate()) return;
@@ -112,12 +153,18 @@ const ok = kind === 'waitlist' ? f.okWaitlist : f.okContact;
         const body = Object.fromEntries(new FormData(form).entries());
         delete (body as Record<string, unknown>).redirect;
         Object.assign(body, { _e: Date.now() - opened, _h: touched });
+        if (d.sitekey) {
+          const t = await token();
+          if (!t) { show('error', d.errBot!); return; }
+          (body as Record<string, unknown>)['cf-turnstile-response'] = t;
+        }
         const res = await fetch(d.endpoint, { method: 'POST', headers: { 'Content-Type': 'application/json', Accept: 'application/json' }, body: JSON.stringify(body) });
         if (res.ok) { form.reset(); show('ok', d.ok!); }
-        else show('error', res.status === 429 ? d.errRate! : d.err!);
+        else show('error', res.status === 429 ? d.errRate! : res.status === 403 ? d.errBot! : d.err!);
       } catch {
         show('error', d.err!);
       } finally {
+        if (widget) window.turnstile?.reset(widget); // each check can be used once
         btn.disabled = false; btn.textContent = label;
       }
     });

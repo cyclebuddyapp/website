@@ -2,7 +2,7 @@
 eyebrow: Privacidad
 h1: Política de privacidad del sitio web
 lead: "Esta política cubre solo el sitio web cyclebuddyapp.com. La app CycleBuddy tendrá su propia política de privacidad cuando se lance."
-updated: 2026-11-20
+updated: 2026-11-26
 ---
 
 ## En resumen
@@ -27,11 +27,12 @@ Cada formulario tiene además un campo oculto que las personas nunca ven. Nos ay
 Para enviar y guardar los mensajes de los formularios usamos dos proveedores:
 
 - **Cloudflare** ejecuta la pequeña función de servidor que recibe los formularios. Usa tu dirección IP por un momento para evitar abusos (por ejemplo, demasiados envíos en poco tiempo). No la guardamos.
+- **Cloudflare Turnstile** comprueba que quien envía un formulario es una persona y no un bot. Solo se carga cuando empiezas a llenar un formulario. Para esta comprobación, Cloudflare revisa señales técnicas de tu navegador (como tu dirección IP y datos del navegador). Es solo una medida de seguridad, no publicidad ni rastreo.
 - **Resend**, un servicio de correo con sede en Estados Unidos, entrega los mensajes de los formularios a nuestra bandeja de entrada y guarda la lista de espera para poder escribirte.
 
 El sitio web está alojado en **GitHub Pages**. Como la mayoría de los servicios de alojamiento, GitHub puede registrar las direcciones IP de quienes visitan el sitio por motivos de seguridad, según su declaración de privacidad. Nosotros no tenemos acceso a esos registros ni los usamos.
 
-Las fuentes tipográficas se sirven desde nuestro propio dominio, así que cargar una página no contacta a ningún tercero.
+Las fuentes tipográficas se sirven desde nuestro propio dominio, así que cargar una página no contacta a ningún tercero. La única excepción es la comprobación Turnstile de arriba, y solo cuando empiezas a llenar un formulario.
 
 ## Cuánto tiempo la guardamos
 

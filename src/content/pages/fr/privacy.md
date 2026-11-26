@@ -2,7 +2,7 @@
 eyebrow: Confidentialité
 h1: Politique de confidentialité du site Web
 lead: "Cette politique couvre uniquement le site Web cyclebuddyapp.com. L’appli CycleBuddy aura sa propre politique de confidentialité à son lancement."
-updated: 2026-11-20
+updated: 2026-11-26
 ---
 
 ## En bref
@@ -27,11 +27,12 @@ Chaque formulaire comporte aussi un champ caché que les personnes ne voient jam
 Pour envoyer et conserver les messages des formulaires, nous faisons appel à deux fournisseurs :
 
 - **Cloudflare** exécute la petite fonction serveur qui reçoit les formulaires. Elle utilise brièvement ton adresse IP pour limiter les abus (par exemple, trop d’envois en peu de temps). Nous ne la conservons pas.
+- **Cloudflare Turnstile** vérifie qu’un formulaire est envoyé par une personne et non par un robot. Il ne se charge que lorsque tu commences à remplir un formulaire. Pour cette vérification, Cloudflare examine des signaux techniques de ton navigateur (comme ton adresse IP et des informations sur le navigateur). C’est uniquement une mesure de sécurité, ni publicité ni pistage.
 - **Resend**, un service de courriel établi aux États-Unis, achemine les messages des formulaires vers notre boîte de réception et conserve la liste d’attente pour que nous puissions t’écrire.
 
 Ce site est hébergé sur **GitHub Pages**. Comme la plupart des hébergeurs Web, GitHub peut consigner les adresses IP des visiteurs à des fins de sécurité, comme l’explique sa déclaration de confidentialité. Nous n’avons pas accès à ces journaux et nous ne les utilisons pas.
 
-Les polices de caractères sont servies depuis notre propre domaine : charger une page ne contacte donc aucun tiers.
+Les polices de caractères sont servies depuis notre propre domaine : charger une page ne contacte donc aucun tiers. La seule exception est la vérification Turnstile ci-dessus, et seulement lorsque tu commences à remplir un formulaire.
 
 ## Combien de temps nous les conservons
 

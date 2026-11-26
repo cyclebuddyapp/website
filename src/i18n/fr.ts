@@ -206,6 +206,7 @@ const fr: Dict = {
     errEmail: 'Entre une adresse courriel valide.',
     errRequired: 'Remplis ce champ.',
     errRate: 'Trop de tentatives. Attends quelques minutes, puis réessaie.',
+    errBot: 'Termine la vérification rapide ci-dessus, puis envoie de nouveau.',
     honeypot: 'Laisse ce champ vide',
     privacyNote: 'Nous nous en servons uniquement pour te répondre.',
     privacyNoteWaitlist: 'Nous utilisons ton courriel uniquement pour te donner des nouvelles de CycleBuddy. Désabonnement possible en tout temps.',

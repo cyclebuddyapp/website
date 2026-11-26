@@ -86,7 +86,14 @@ For local development, create `website/.env` with `PUBLIC_FORMS_ENDPOINT=…` (i
 
 ---
 
-## 5. Test
+## 5. "Not a robot" check (Cloudflare Turnstile)
+
+1. Cloudflare dashboard → **Turnstile** → **Add widget**. Name `CycleBuddy`, hostnames `cyclebuddyapp.com` and `www.cyclebuddyapp.com`, mode **Managed**, pre-clearance **No**.
+2. Copy the **Site key** (public) into a GitHub Actions variable `PUBLIC_TURNSTILE_SITEKEY` (or `src/data/site.ts`), and push so the site rebuilds.
+3. Copy the **Secret key** into the Worker: Workers → `cyclebuddy-forms` → Settings → Variables and Secrets → Add → type **Secret**, name `TURNSTILE_SECRET`.
+   Do step 2 before step 3: the Worker starts requiring the check as soon as the secret exists.
+
+## 6. Test
 
 - **Waitlist** on the homepage → you get a confirmation email, and the contact appears in Resend.
 - **Contact** form → an email arrives at hello@cyclebuddy.ca. Hitting *Reply* answers the visitor.
@@ -99,7 +106,7 @@ Logs: `cd worker && npx wrangler tail` (they show status codes only, never names
 
 ## How things are kept private
 
-- The site sets **no cookies** and loads **nothing from third parties** (fonts are self-hosted).
+- The site sets **no cookies** and loads **nothing from third parties** (fonts are self-hosted). The one exception: Cloudflare Turnstile, loaded only when someone starts filling in a form.
 - The Worker stores nothing. The visitor IP is only a short-lived rate-limit key in Cloudflare, never logged.
 - The Resend API key is a Cloudflare secret, never in this repo.
 - If analytics are ever added: cookieless and self-hosted only, and update `/privacy` first.

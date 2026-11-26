@@ -2,7 +2,7 @@
 eyebrow: Privacy
 h1: Website privacy policy
 lead: "This policy covers the cyclebuddyapp.com website only. The CycleBuddy app will have its own privacy policy at launch."
-updated: 2026-11-20
+updated: 2026-11-26
 ---
 
 ## The short version
@@ -27,11 +27,12 @@ Each form also has a hidden field that people never see. It helps us block autom
 To send and store form messages, we use two service providers:
 
 - **Cloudflare** runs the small server function that receives the forms. It uses your IP address briefly to limit abuse (for example, too many submissions in a short time). We don't store it.
+- **Cloudflare Turnstile** checks that a form is being sent by a person, not a bot. It loads only when you start filling in a form. To do this check, Cloudflare looks at technical signals from your browser (such as your IP address and browser details). It is a security check only, not advertising or tracking.
 - **Resend**, an email service based in the United States, delivers form messages to our inbox and keeps the waitlist so we can email you.
 
 This website itself is hosted on **GitHub Pages**. Like most web hosts, GitHub may log visitors' IP addresses for security purposes, as described in GitHub's privacy statement. We don't have access to those logs and we don't use them.
 
-The fonts on this site are served from our own domain, so loading a page doesn't contact any third party.
+The fonts on this site are served from our own domain, so loading a page doesn't contact any third party. The only exception is the Turnstile check above, and only once you start filling in a form.
 
 ## How long we keep it
 

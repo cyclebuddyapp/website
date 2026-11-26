@@ -202,6 +202,7 @@ const en = {
     errEmail: 'Please enter a valid email address.',
     errRequired: 'Please fill in this field.',
     errRate: 'Too many attempts. Please wait a few minutes and try again.',
+    errBot: 'Please complete the quick check above, then send again.',
     honeypot: 'Leave this field empty',
     privacyNote: 'We only use this to reply to you.',
     privacyNoteWaitlist: 'We only use your email to tell you about CycleBuddy. Unsubscribe anytime.',
